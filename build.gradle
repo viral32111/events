@@ -70,3 +70,16 @@ publishing {
 		// retrieving dependencies.
 	}
 }
+
+// Custom task to copy mod .jar into local development server
+task copyJarToServer {
+	dependsOn( "build" )
+
+	doLast {
+		copy {
+			from "build/libs/example-mod-0.1.0.jar"
+			into "../../Documents/Fabric Dev Server/mods"
+		}
+
+	}
+}
