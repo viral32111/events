@@ -15,9 +15,9 @@ See the [Gradle properties](/gradle.properties#L9-L15) and [Fabric mod metadata]
 * `ServerPlayerEntity`
   * [`onDeath`](/src/main/java/com/viral32111/example/mixin/ServerPlayerEntityMixin.java#L15) - A player has died.
 * `ServerPlayNetworkHandler`
-  * TODO: [`handleMessage`] - A player sent a chat message.
+  * TODO: [`handleMessage`]() - A player sent a chat message.
 * `PlayerAdvancementTracker`
-  * TODO: [`grantCriterion`] - A player gained an advancement.
+  * TODO: [`grantCriterion`]() - A player gained an advancement.
 
 ## License
 
