@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+
+	"id": "example",
+	"version": "${version}",
+
+	"name": "Example Mod",
+	"description": "An example mod for Fabric to document common mixins.",
+	"authors": [ {
+		"name": "viral32111",
+		"contact": {
+			"homepage": "https://viral32111.com",
+			"email": "contact@viral32111.com"
+		}
+	} ],
+	"contributors": [],
+	"contact": {
+		"homepage": "https://github.com/viral32111/ExampleMod",
+		"sources": "https://github.com/viral32111/ExampleMod",
+		"issues": "https://github.com/viral32111/ExampleMod/issues"
+	},
+	"license": "Unlicense",
+
+	"environment": "server",
+	"entrypoints": {
+		"server": [ "com.viral32111.example.Example" ]
+	},
+
+	"mixins": [ {
+		"environment": "server",
+		"config": "example.mixins.json"
+	} ],
+
+	"depends": {
+		"fabricloader": ">=0.14.6",
+		"fabric": "*",
+		"minecraft": "~1.19-beta.4",
+		"java": ">=17"
+	}
+}
