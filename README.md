@@ -9,11 +9,15 @@ See the [Gradle properties](/gradle.properties#L9-L15) and [Fabric mod metadata]
 ## Contents
 
 * `PlayerManager`
-  * [`checkCanJoin`](/src/main/java/com/viral32111/example/mixin/PlayerManagerMixin.java#L22-L33) - A player attempts to join the server (before checks for whitelist, bans, etc.)
-  * [`onPlayerConnect`](/src/main/java/com/viral32111/example/mixin/PlayerManagerMixin.java#L36-L51) - A player successfully joins the server
-  * [`remove`](/src/main/java/com/viral32111/example/mixin/PlayerManagerMixin.java#L54-L64) - A player leaves the server
+  * [`checkCanJoin`](/src/main/java/com/viral32111/example/mixin/PlayerManagerMixin.java#L22-L33) - A player attempts to join the server (before checks for whitelist, bans, etc.).
+  * [`onPlayerConnect`](/src/main/java/com/viral32111/example/mixin/PlayerManagerMixin.java#L36-L51) - A player has joined the server.
+  * [`remove`](/src/main/java/com/viral32111/example/mixin/PlayerManagerMixin.java#L54-L64) - A player has left the server.
 * `ServerPlayerEntity`
-  * [`onDeath`](/src/main/java/com/viral32111/example/mixin/ServerPlayerEntityMixin.java#L15) - A player dies
+  * [`onDeath`](/src/main/java/com/viral32111/example/mixin/ServerPlayerEntityMixin.java#L15) - A player has died.
+* `ServerPlayNetworkHandler`
+  * TODO: [`handleMessage`] - A player sent a chat message.
+* `PlayerAdvancementTracker`
+  * TODO: [`grantCriterion`] - A player gained an advancement.
 
 ## License
 
