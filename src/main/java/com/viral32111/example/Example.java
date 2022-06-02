@@ -11,10 +11,10 @@ public class Example implements DedicatedServerModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger( "example" );
 
-	// This runs when the mod is initalised on the server...
+	// This runs when the mod is initalised on the server.
 	@Override
 	public void onInitializeServer() {
-		LOGGER.info( "Hello World!" );
+		LOGGER.info( "The Example mod has initialized in the server environment." );
 	}
 
 }
