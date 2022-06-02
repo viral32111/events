@@ -13,7 +13,7 @@ See the [Gradle properties](/gradle.properties#L9-L15) and [Fabric mod metadata]
   * [`onPlayerConnect`](/src/main/java/com/viral32111/example/mixin/PlayerManagerMixin.java#L46-L72) - A player has joined the server.
   * [`remove`](/src/main/java/com/viral32111/example/mixin/PlayerManagerMixin.java#L75-L94) - A player has left the server.
 * `ServerPlayerEntity`
-  * [`onDeath`](/src/main/java/com/viral32111/example/mixin/ServerPlayerEntityMixin.java#L15) - A player has died.
+  * [`onDeath`](/src/main/java/com/viral32111/example/mixin/ServerPlayerEntityMixin.java#L16-L61) - A player has died.
 * `ServerPlayNetworkHandler`
   * TODO: [`handleMessage`]() - A player sent a chat message.
 * `PlayerAdvancementTracker`
