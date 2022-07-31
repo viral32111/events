@@ -13,8 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.time.Instant;
-
 @Mixin( ServerPlayNetworkHandler.class )
 public class ServerPlayNetworkHandlerMixin {
 
@@ -22,47 +20,27 @@ public class ServerPlayNetworkHandlerMixin {
 	@Shadow
 	public ServerPlayerEntity player;
 
-	// Runs when a player sends a message in chat.
-	// NOTE: Does not include properties for message signatures, but will still run for signed messages.
-	@Inject( method = "handleMessage", at = @At( "TAIL" ) )
-	private void handleMessage( ChatMessageC2SPacket packet, FilteredMessage<String> message, CallbackInfo callbackInfo ) {
+	// Runs when a player has sent a message in chat.
+	// NOTE: This will run for signed & unsigned messages, but signed messages will have .signature()-related properties.
+	@Inject( method = "onChatMessage", at = @At( "TAIL" ) )
+	private void onChatMessage( ChatMessageC2SPacket packet, CallbackInfo callbackInfo ) {
 
 		// The player's account username and unique identifier.
 		String playerName = player.getName().getString();
 		String playerUUID = player.getUuidAsString();
 
 		// The content of the chat message.
-		String messageContent = message.raw();
+		String messageContent = packet.chatMessage();
+
+		// Is the message signed?
+		boolean isSigned = !packet.signature().isEmpty();
 
 		// Print a message to the server's console with details of this event.
-		Example.LOGGER.info( String.format( "Player '%s' (%s) sent normal chat message '%s'.", playerName, playerUUID, messageContent ) );
+		Example.LOGGER.info( String.format( "Player '%s' (%s) sent chat message '%s' (Signed: %b).", playerName, playerUUID, messageContent, isSigned ) );
 
 	}
 
-	// Runs when a player sends a message in chat.
-	// NOTE: Includes properties for message signatures, but will still run for unsigned messages.
-	@Inject( method = "handleDecoratedMessage", at = @At( "TAIL" ) )
-	private void handleDecoratedMessage( FilteredMessage<SignedMessage> message, CallbackInfo callbackInfo ) {
-
-		// The player's account username and unique identifier.
-		String playerName = player.getName().getString();
-		String playerUUID = player.getUuidAsString();
-
-		// The content of the chat message.
-		String messageContent = message.raw().getContent().getString();
-
-		// Useful details about the signed message.
-		boolean signatureExists = message.raw().signature().saltSignature().isSignaturePresent(); // Has this message been signed?
-		String signatureContent = message.raw().signedContent().getString(); // The message that was signed (this should be the same as messageContent above).
-		String signatureAuthorUUID = message.raw().signature().sender().toString(); // Unique identifier of the player that sent (and thus signed) the message (this should be the same as playerUUID above).
-		Instant signatureTimestamp = message.raw().signature().timestamp(); // Precise date & time of when the message was signed.
-
-		// Print a message to the server's console with details of this event.
-		Example.LOGGER.info( String.format( "Player '%s' (%s) sent decorated chat message '%s' (Is Signed: %s, Signed By: %s) at '%s'.", playerName, playerUUID, messageContent, ( signatureExists ? "Yes" : "No" ), signatureAuthorUUID, signatureTimestamp.toString() ) );
-
-	}
-
-	// Runs when a player types a character in their chatbox.
+	// Runs when a player has typed a character in their chatbox.
 	// NOTE: Does not run if the player disables chat previews on their client, or if the server has chat previews disabled.
 	@Inject( method = "onRequestChatPreview", at = @At( "RETURN" ) )
 	private void onRequestChatPreview( RequestChatPreviewC2SPacket packet, CallbackInfo callbackInfo ) {

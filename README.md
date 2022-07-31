@@ -15,9 +15,8 @@ See the [Gradle properties](/gradle.properties#L9-L15) and [Fabric mod metadata]
 * `ServerPlayerEntity`
   * [`onDeath`](/src/main/java/com/viral32111/example/mixin/ServerPlayerEntityMixin.java#L16-L61) - A player has died.
 * `ServerPlayNetworkHandler`
-  * [`handleMessage`](/src/main/java/com/viral32111/example/mixin/ServerPlayNetworkHandlerMixin.java#L27-L40) - A player sent a chat message.
-  * [`handleDecoratedMessage`](/src/main/java/com/viral32111/example/mixin/ServerPlayNetworkHandlerMixin.java#L44-L63) - A player sent a decorated (signed) chat message.
-  * [`onRequestChatPreview`](/src/main/java/com/viral32111/example/mixin/ServerPlayNetworkHandlerMixin.java#L67-L80) - A player typed a character in their chatbox.
+  * [`onChatMessage`](/src/main/java/com/viral32111/example/mixin/ServerPlayNetworkHandlerMixin.java#L25-L41) - A player has sent a chat message (signed or unsigned).
+  * [`onRequestChatPreview`](/src/main/java/com/viral32111/example/mixin/ServerPlayNetworkHandlerMixin.java#L45-L58) - A player has typed a character in their chatbox.
 * `PlayerAdvancementTracker`
   * TODO: [`grantCriterion`]() - A player gained an advancement.
 
