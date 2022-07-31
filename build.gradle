@@ -82,9 +82,8 @@ task copyJarToServer {
 
 	doLast {
 		copy {
-			from "build/libs/example-mod-0.1.0.jar"
+			from "${project.buildDir}/libs/${project.archives_base_name}-${project.version}.jar"
 			into "../../Documents/Fabric Dev Server/mods"
 		}
-
 	}
 }
