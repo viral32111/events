@@ -5,7 +5,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -13,13 +12,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin( ServerPlayerEntity.class )
 public class ServerPlayerEntityMixin {
 
-	// The player these events are for
-	@Shadow
-	public ServerPlayerEntity player;
-
 	// Runs when a player has died.
 	@Inject( method = "onDeath", at = @At( "TAIL" ) )
 	private void onDeath( DamageSource damageSource, CallbackInfo info ) {
+
+		// Cast the current object (within the injection) to a player.
+		// NOTE: Must cast to generic object first otherwise the cast is invalid.
+		ServerPlayerEntity player = ( ServerPlayerEntity ) ( Object ) this;
 
 		// Store the attacker and source of the player's death.
 		// NOTE: These can be null if the death was not caused by another entity (i.e., falling, /kill).
