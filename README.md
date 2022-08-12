@@ -2,7 +2,7 @@
 
 I find it annoying that Minecraft Fabric mixins are not documented enough, or at all in some cases, and I am fed up of searching through mapped Minecraft sources to find functions to hook into every single time, so this project serves as a place where I can document and demonstrate how to use all of the mixins I have come across while developing my Fabric mods (which are primarily server-side ones).
 
-The mixins used in this repository are accurate as of release [`1.19.1`](https://maven.fabricmc.net/docs/yarn-1.19.1+build.5/). Feel free to submit [pull requests](https://github.com/viral32111/ExampleMod/pulls) to keep this project up-to-date if you have suggestions for new mixins to add, or encounter an existing one that is broken.
+The mixins used in this repository are accurate as of release [`1.19.2`](https://fabricmc.net/develop/). Feel free to submit [pull requests](https://github.com/viral32111/ExampleMod/pulls) to keep this project up-to-date if you have suggestions for new mixins to add, or encounter an existing one that is broken.
 
 See the [Gradle properties](/gradle.properties#L9-L15) and [Fabric mod metadata](/src/main/resources/fabric.mod.json#L34-L39) files for what versions this mod was last built against.
 
