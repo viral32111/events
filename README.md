@@ -20,7 +20,7 @@ See the [Gradle properties](/gradle.properties#L9-L15) and [Fabric mod metadata]
 
 ## Building
 
-Set the gradle variable `MINECRAFT_FABRIC_SERVER_PATH` to the full path of your local Minecraft Fabric server's root directory, or comment out the `build.finalizedBy...` line in the [`Gradle build`](/build.gradle#L92) file.
+Set the gradle variable `MINECRAFT_FABRIC_SERVER_PATH` to the full path of your local Minecraft Fabric server's root directory, and run the `copyJarToServer` Gradle task to build the project and automatically copy the JAR file into your server's mods directory.
 
 ## License
 

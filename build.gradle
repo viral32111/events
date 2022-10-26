@@ -89,4 +89,4 @@ task copyJarToServer {
 }
 
 // Run the custom task after the build task
-build.finalizedBy( copyJarToServer )
+//build.finalizedBy( copyJarToServer )
