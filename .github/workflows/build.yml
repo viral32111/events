@@ -3,6 +3,7 @@ name: Build
 on:
   push:
     paths:
+    - '.github/workflows/build.yml'
     - 'gradle/**'
     - 'src/**'
     - 'build.gradle'
