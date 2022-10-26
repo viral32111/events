@@ -1,8 +1,6 @@
-# Example
-
 I find it annoying that Minecraft Fabric mixins are not documented enough, or at all in some cases, and I am fed up of searching through mapped Minecraft sources to find functions to hook into every single time, so this project serves as a place where I can document and demonstrate how to use all of the mixins I have come across while developing my Fabric mods (which are primarily server-side ones).
 
-The mixins used in this repository are accurate as of release [`1.19.2`](https://fabricmc.net/develop/). Feel free to submit [pull requests](https://github.com/viral32111/ExampleMod/pulls) to keep this project up-to-date if you have suggestions for new mixins to add, or encounter an existing one that is broken.
+The mixins used in this repository are accurate as of release `1.19.2`. Feel free to submit [pull requests](https://github.com/viral32111/ExampleMod/pulls) to keep this project up-to-date if you have suggestions for new mixins to add, or encounter an existing one that is broken.
 
 See the [Gradle properties](/gradle.properties#L9-L15) and [Fabric mod metadata](/src/main/resources/fabric.mod.json#L34-L39) files for what versions this mod was last built against.
 
@@ -19,6 +17,10 @@ See the [Gradle properties](/gradle.properties#L9-L15) and [Fabric mod metadata]
   * [`onRequestChatPreview`](/src/main/java/com/viral32111/example/mixin/ServerPlayNetworkHandlerMixin.java#L45-L58) - A player has typed a character in their chatbox.
 * `PlayerAdvancementTracker`
   * TODO: [`grantCriterion`]() - A player gained an advancement.
+
+## Building
+
+Set the gradle variable `MINECRAFT_FABRIC_SERVER_PATH` to the full path of your local Minecraft Fabric server's root directory, or comment out the `build.finalizedBy...` line in the [`Gradle build`](/build.gradle#L92) file.
 
 ## License
 
