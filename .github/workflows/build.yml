@@ -1,0 +1,49 @@
+name: Build
+
+on:
+  push:
+    paths:
+    - 'gradle/**'
+    - 'src/**'
+    - 'build.gradle'
+    - 'settings.gradle'
+    - 'gradle.properties'
+    branches:
+    - '**'
+    tags:
+    - '*.*.*'
+  pull_request:
+    branches:
+    - '**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Ubuntu
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+
+    steps:
+    - name: Clone Repository
+      uses: actions/checkout@v3
+
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: 17
+        distribution: temurin
+
+    - name: Make Gradle Executable
+      run: chmod +x ./gradlew
+
+    - name: Build Mod
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: build
+
+    - name: Upload Mod
+      uses: actions/upload-artifact@v3
+      with:
+        name: JARs
+        path: ./build/libs/*.jar
