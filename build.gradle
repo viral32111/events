@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
+	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -36,12 +36,12 @@ dependencies {
 processResources {
 	inputs.property "version", project.version
 
-	filesMatching("fabric.mod.json") {
+	filesMatching( "fabric.mod.json" ) {
 		expand "version": project.version
 	}
 }
 
-tasks.withType(JavaCompile).configureEach {
+tasks.withType( JavaCompile ).configureEach {
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
 	it.options.release = 17
 }
@@ -54,7 +54,7 @@ java {
 }
 
 jar {
-	from("LICENSE") {
+	from( "LICENSE" ) {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
 }
@@ -62,7 +62,7 @@ jar {
 // configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		mavenJava( MavenPublication ) {
 			from components.java
 		}
 	}
@@ -83,7 +83,10 @@ task copyJarToServer {
 	doLast {
 		copy {
 			from "${project.buildDir}/libs/${project.archives_base_name}-${project.version}.jar"
-			into "../../Documents/Fabric Dev Server/mods"
+			into "${MINECRAFT_FABRIC_SERVER_PATH}/mods"
 		}
 	}
 }
+
+// Run the custom task after the build task
+build.finalizedBy( copyJarToServer )
