@@ -27,8 +27,18 @@ jobs:
         with:
           languages: java
 
-      - name: Auto-build
-        uses: github/codeql-action/autobuild@v2
+      # CodeQL fails to auto-build Kotlin 1.8.10
+      #- name: Auto-build
+      #  uses: github/codeql-action/autobuild@v2
+
+      - name: Set Gradle permissions
+        run: chmod +x ./App/gradlew
+
+      - name: Build project
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build --scan
+          cache-disabled: true
 
       - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v2

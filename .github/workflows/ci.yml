@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - 'gradle/**'
+      - 'src/**'
+      - '*.gradle'
+      - 'gradle.properties'
+      - '.github/workflows/ci.yml'
+    branches:
+      - '**'
+    tags:
+      - '*.*.*'
+  workflow_dispatch:
+
+env:
+  ARTIFACT_NAME: Example-Mod
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: temurin
+
+      - name: Set Gradle permissions
+        run: chmod +x ./App/gradlew
+
+      - name: Build project
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build --scan
+          cache-disabled: true
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ./build/libs/*.jar
