@@ -32,7 +32,7 @@ jobs:
       #  uses: github/codeql-action/autobuild@v2
 
       - name: Set Gradle permissions
-        run: chmod +x ./App/gradlew
+        run: chmod +x ./gradlew
 
       - name: Build project
         uses: gradle/gradle-build-action@v2
