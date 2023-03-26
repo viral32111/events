@@ -22,6 +22,13 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v3
 
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: temurin
+
+      # This installs Java 8, but we need Java 17
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
