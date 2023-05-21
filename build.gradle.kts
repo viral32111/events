@@ -3,6 +3,7 @@ plugins {
 	kotlin( "jvm" ).version( System.getProperty( "kotlin_version" ) )
 }
 
+
 base { archivesName.set( project.extra[ "archives_base_name" ] as String ) }
 version = project.extra[ "mod_version" ] as String
 group = project.extra[ "maven_group" ] as String

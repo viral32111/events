@@ -4,8 +4,11 @@ on:
   push:
     paths:
       - 'gradle/**'
+      - 'gradlew'
+      - 'gradlew.bat'
       - 'src/**'
-      - '*.gradle'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
       - 'gradle.properties'
       - '.github/workflows/ci.yml'
     branches:
@@ -15,7 +18,7 @@ on:
   workflow_dispatch:
 
 env:
-  ARTIFACT_NAME: Example-Mod
+  ARTIFACT_NAME: example-mod
 
 jobs:
   build:
@@ -39,7 +42,7 @@ jobs:
       - name: Build project
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build --scan
+          arguments: build
           cache-disabled: true
 
       - name: Upload build artifact

@@ -40,7 +40,7 @@ jobs:
       - name: Build project
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build --scan
+          arguments: build
           cache-disabled: true
 
       - name: Perform CodeQL analysis
