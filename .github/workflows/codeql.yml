@@ -12,7 +12,7 @@ on:
 jobs:
   codeql:
     name: CodeQL
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     permissions:
       actions: read
       contents: read
@@ -28,18 +28,14 @@ jobs:
           java-version: 17
           distribution: temurin
 
-      # This installs Java 8, but we need Java 17
+      - name: Set Gradle permissions
+        run: chmod +x ./gradlew
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: java
-
-      # CodeQL fails to auto-build Kotlin 1.8.10
-      #- name: Auto-build
-      #  uses: github/codeql-action/autobuild@v2
-
-      - name: Set Gradle permissions
-        run: chmod +x ./gradlew
+          tools: latest
 
       - name: Build project
         uses: gradle/gradle-build-action@v2
