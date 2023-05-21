@@ -1,8 +1,8 @@
 # Example Mod
 
-I find it fustrating that [Minecraft mixins](https://github.com/SpongePowered/Mixin/wiki/Mixins-on-Minecraft-Forge) are not documented enough, and I am fed up of constantly searching through mapped Minecraft sources for the right function. Thus, this project serves as a place for me to document and demonstrate how to use the mixins I come across while developing my Fabric mods.
+I find it frustrating that [Minecraft mixins](https://github.com/SpongePowered/Mixin/wiki/Mixins-on-Minecraft-Forge) are not documented enough, and I am fed up with constantly searching through mapped Minecraft sources for the right function. Thus, this project serves as a place for me to document and demonstrate how to use the mixins I come across while developing my Fabric mods.
 
-The mixins in this repository are accurate as of release `1.19.2`. Feel free to submit [pull requests](https://github.com/viral32111/ExampleMod/pulls) to keep this project up-to-date if mixins break or to document new ones.
+The mixins in this repository are accurate as of release `1.19.4`. Feel free to submit [pull requests](https://github.com/viral32111/example-mod/pulls) to keep this project up-to-date if mixins break or to document new ones.
 
 See the [Gradle properties](/gradle.properties) and [Fabric mod metadata](/src/main/resources/fabric.mod.json) files for the versions this mod was last built against.
 
@@ -15,8 +15,7 @@ See the [Gradle properties](/gradle.properties) and [Fabric mod metadata](/src/m
 * `ServerPlayerEntity`
   * [`onDeath`](/src/main/java/com/viral32111/example/mixin/ServerPlayerEntityMixin.java#L16-L61) - A player has died.
 * `ServerPlayNetworkHandler`
-  * [`onChatMessage`](/src/main/java/com/viral32111/example/mixin/ServerPlayNetworkHandlerMixin.java#L25-L41) - A player has sent a chat message (signed or unsigned).
-  * [`onRequestChatPreview`](/src/main/java/com/viral32111/example/mixin/ServerPlayNetworkHandlerMixin.java#L45-L58) - A player has typed a character in their chatbox.
+  * [`onChatMessage`](/src/main/java/com/viral32111/example/mixin/ServerPlayNetworkHandlerMixin.java#L22-L38) - A player has sent a chat message (signed or unsigned).
 * `PlayerAdvancementTracker`
   * TODO: [`grantCriterion`]() - A player gained an advancement.
 

@@ -37,23 +37,4 @@ public class ServerPlayNetworkHandlerMixin {
 
 	}
 
-	// Runs when a player has typed a character in their chat-box.
-	// NOTE: Does not run if the player disables chat previews on their client, or if the server has chat previews disabled.
-	/*
-	@Inject( method = "onRequestChatPreview", at = @At( "RETURN" ) )
-	private void onRequestChatPreview( RequestChatPreviewC2SPacket packet, CallbackInfo callbackInfo ) {
-
-		// The player's account username and unique identifier.
-		String playerName = player.getName().getString();
-		String playerUUID = player.getUuidAsString();
-
-		// The content of the chat message so far.
-		String previewContent = packet.query();
-
-		// Print a message to the server's console with details of this event.
-		Example.Companion.getLOGGER().info( String.format( "Player '%s' (%s) typed '%s' in chat.", playerName, playerUUID, previewContent ) );
-
-	}
-	*/
-
 }
