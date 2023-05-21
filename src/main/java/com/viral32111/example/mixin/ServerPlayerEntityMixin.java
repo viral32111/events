@@ -1,4 +1,4 @@
-package com.viral32111.example.mixins;
+package com.viral32111.example.mixin;
 
 import com.viral32111.example.Example;
 import net.minecraft.entity.Entity;
@@ -50,7 +50,7 @@ public class ServerPlayerEntityMixin {
 		}
 
 		// Print a message to the server's console with details of this event.
-		Example.INSTANCE.getLOGGER().info( String.format( "Player '%s' (%s) died due to %s, at %.0f, %.0f, %.0f.", playerName, playerUUID, deathReason, playerPosX, playerPosY, playerPosZ ) );
+		Example.Companion.getLOGGER().info( String.format( "Player '%s' (%s) died due to %s, at %.0f, %.0f, %.0f.", playerName, playerUUID, deathReason, playerPosX, playerPosY, playerPosZ ) );
 
 		/* Examples:
 		 - Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) died due to OUTOFWORLD, at 62, 63, -136.

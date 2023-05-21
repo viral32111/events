@@ -5,12 +5,14 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 @Suppress( "UNUSED" )
-object Example: DedicatedServerModInitializer {
+class Example: DedicatedServerModInitializer {
 
 	// A logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
-	val LOGGER: Logger = LoggerFactory.getLogger( "example" )
+	companion object {
+		val LOGGER: Logger = LoggerFactory.getLogger( "example" )
+	}
 
 	// This displays a message when the mod is initialised server-side.
 	override fun onInitializeServer() {

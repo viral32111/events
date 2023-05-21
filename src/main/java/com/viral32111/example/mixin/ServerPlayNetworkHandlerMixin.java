@@ -1,4 +1,4 @@
-package com.viral32111.example.mixins;
+package com.viral32111.example.mixin;
 
 import com.viral32111.example.Example;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
@@ -33,7 +33,7 @@ public class ServerPlayNetworkHandlerMixin {
 		boolean isSigned = packet.signature() != null && packet.signature().data().length > 0;
 
 		// Print a message to the server's console with details of this event.
-		Example.INSTANCE.getLOGGER().info( String.format( "Player '%s' (%s) sent chat message '%s' (Signed: %b).", playerName, playerUUID, messageContent, isSigned ) );
+		Example.Companion.getLOGGER().info( String.format( "Player '%s' (%s) sent chat message '%s' (Signed: %b).", playerName, playerUUID, messageContent, isSigned ) );
 
 	}
 
@@ -51,7 +51,7 @@ public class ServerPlayNetworkHandlerMixin {
 		String previewContent = packet.query();
 
 		// Print a message to the server's console with details of this event.
-		Example.INSTANCE.getLOGGER().info( String.format( "Player '%s' (%s) typed '%s' in chat.", playerName, playerUUID, previewContent ) );
+		Example.Companion.getLOGGER().info( String.format( "Player '%s' (%s) typed '%s' in chat.", playerName, playerUUID, previewContent ) );
 
 	}
 	*/

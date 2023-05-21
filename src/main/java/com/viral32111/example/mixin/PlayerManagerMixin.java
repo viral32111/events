@@ -1,4 +1,4 @@
-package com.viral32111.example.mixins;
+package com.viral32111.example.mixin;
 
 import com.mojang.authlib.GameProfile;
 import com.viral32111.example.Example;
@@ -34,7 +34,7 @@ public class PlayerManagerMixin {
 		int sourcePort = address.getPort();
 
 		// Print a message to the server's console with details of this event.
-		Example.INSTANCE.getLOGGER().info( String.format( "Player '%s' (%s) is attempting to join from %s:%d.", playerName, playerUUID, sourceIP, sourcePort ) );
+		Example.Companion.getLOGGER().info( String.format( "Player '%s' (%s) is attempting to join from %s:%d.", playerName, playerUUID, sourceIP, sourcePort ) );
 
 		/* Examples:
 		 - Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) is attempting to join from 127.0.0.1:56346.
@@ -63,7 +63,7 @@ public class PlayerManagerMixin {
 		double playerPosZ = player.getPos().getZ();
 
 		// Print a message to the server's console with details of this event.
-		Example.INSTANCE.getLOGGER().info( String.format( "Player '%s' (%s) joined from %s:%d, and spawned at %.0f, %.0f, %.0f.", playerName, playerUUID, sourceIP, sourcePort, playerPosX, playerPosY, playerPosZ ) );
+		Example.Companion.getLOGGER().info( String.format( "Player '%s' (%s) joined from %s:%d, and spawned at %.0f, %.0f, %.0f.", playerName, playerUUID, sourceIP, sourcePort, playerPosX, playerPosY, playerPosZ ) );
 
 		/* Examples:
 		 - Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) joined from 127.0.0.1:56346, and spawned at 62, 63, -135.
@@ -85,7 +85,7 @@ public class PlayerManagerMixin {
 		double playerPosZ = player.getPos().getZ();
 
 		// Print a message to the server's console with details of this event.
-		Example.INSTANCE.getLOGGER().info( String.format( "Player '%s' (%s) left, while at %.0f, %.0f, %.0f.", playerName, playerUUID, playerPosX, playerPosY, playerPosZ ) );
+		Example.Companion.getLOGGER().info( String.format( "Player '%s' (%s) left, while at %.0f, %.0f, %.0f.", playerName, playerUUID, playerPosX, playerPosY, playerPosZ ) );
 
 		/* Examples:
 		 - Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) left, while at 74, 63, -136.

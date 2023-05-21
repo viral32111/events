@@ -1,7 +1,7 @@
 {
 	"required": true,
 	"minVersion": "0.8",
-	"package": "com.viral32111.example.mixins",
+	"package": "com.viral32111.example.mixin",
 	"compatibilityLevel": "JAVA_${ java }",
 	"verbose": true,
 	"injectors": {
