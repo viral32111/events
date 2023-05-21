@@ -1,10 +1,12 @@
-I find it annoying that Minecraft Fabric mixins are not documented enough, or at all in some cases, and I am fed up of searching through mapped Minecraft sources to find functions to hook into every single time, so this project serves as a place where I can document and demonstrate how to use all of the mixins I have come across while developing my Fabric mods (which are primarily server-side ones).
+# Example Mod
 
-The mixins used in this repository are accurate as of release `1.19.2`. Feel free to submit [pull requests](https://github.com/viral32111/ExampleMod/pulls) to keep this project up-to-date if you have suggestions for new mixins to add, or encounter an existing one that is broken.
+I find it fustrating that [Minecraft mixins](https://github.com/SpongePowered/Mixin/wiki/Mixins-on-Minecraft-Forge) are not documented enough, and I am fed up of constantly searching through mapped Minecraft sources for the right function. Thus, this project serves as a place for me to document and demonstrate how to use the mixins I come across while developing my Fabric mods.
 
-See the [Gradle properties](/gradle.properties#L9-L15) and [Fabric mod metadata](/src/main/resources/fabric.mod.json#L34-L39) files for what versions this mod was last built against.
+The mixins in this repository are accurate as of release `1.19.2`. Feel free to submit [pull requests](https://github.com/viral32111/ExampleMod/pulls) to keep this project up-to-date if mixins break or to document new ones.
 
-## Contents
+See the [Gradle properties](/gradle.properties) and [Fabric mod metadata](/src/main/resources/fabric.mod.json) files for the versions this mod was last built against.
+
+## Mixins
 
 * `PlayerManager`
   * [`checkCanJoin`](/src/main/java/com/viral32111/example/mixin/PlayerManagerMixin.java#L22-L43) - A player attempts to join the server (before checks for whitelist, bans, etc.).
@@ -20,7 +22,7 @@ See the [Gradle properties](/gradle.properties#L9-L15) and [Fabric mod metadata]
 
 ## Building
 
-Set the gradle variable `MINECRAFT_FABRIC_SERVER_PATH` to the full path of your local Minecraft Fabric server's root directory, and run the `copyJarToServer` Gradle task to build the project and automatically copy the JAR file into your server's mods directory.
+Set the `MINECRAFT_FABRIC_SERVER_PATH` Gradle variable to the absolute path of your local Minecraft Fabric server, then run the `copyJarToServer` Gradle task to build the project and automatically copy the JAR file into your server's mods directory.
 
 ## License
 
