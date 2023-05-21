@@ -4,7 +4,9 @@ I find it frustrating that [Minecraft mixins](https://github.com/SpongePowered/M
 
 The mixins in this repository are accurate as of release `1.19.4`. Feel free to submit [pull requests](https://github.com/viral32111/example-mod/pulls) to keep this project up-to-date if mixins break or to document new ones.
 
-See the [Gradle properties](/gradle.properties) and [Fabric mod metadata](/src/main/resources/fabric.mod.json) files for the versions this mod was last built against.
+See the [Gradle properties file](/gradle.properties) for the versions this mod was last built against.
+
+This mod was rewritten using Kotlin in May 2023. See [0.1.0](https://github.com/viral32111/example-mod/tree/0.1.0) for the Java version.
 
 ## License
 
