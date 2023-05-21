@@ -6,7 +6,7 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.ActionResult
 import java.net.InetSocketAddress
 
-// Runs when a player joins the server.
+// Runs when a player has joined the server.
 fun playerJoinCallbackListener( connection: ClientConnection, player: ServerPlayerEntity ): ActionResult {
 
 	// Cast the connection address to expose address & port properties.

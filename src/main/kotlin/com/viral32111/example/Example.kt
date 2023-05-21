@@ -1,11 +1,7 @@
 package com.viral32111.example
 
-import com.viral32111.example.callback.PlayerCanJoinCallback
-import com.viral32111.example.callback.PlayerJoinCallback
-import com.viral32111.example.callback.PlayerLeaveCallback
-import com.viral32111.example.listener.playerCanJoinCallbackListener
-import com.viral32111.example.listener.playerJoinCallbackListener
-import com.viral32111.example.listener.playerLeaveCallbackListener
+import com.viral32111.example.callback.*
+import com.viral32111.example.listener.*
 import net.fabricmc.api.DedicatedServerModInitializer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -28,6 +24,8 @@ class Example: DedicatedServerModInitializer {
 		PlayerJoinCallback.EVENT.register( ::playerJoinCallbackListener )
 		PlayerCanJoinCallback.EVENT.register( ::playerCanJoinCallbackListener )
 		PlayerLeaveCallback.EVENT.register( ::playerLeaveCallbackListener )
+		PlayerDeathCallback.EVENT.register( ::playerDeathCallbackListener )
+		PlayerChatMessageCallback.EVENT.register( ::playerChatMessageCallbackListener )
 
 	}
 

@@ -34,7 +34,7 @@ public class PlayerManagerMixin {
 
 	}
 
-	// Runs when a player joins the server.
+	// Runs when a player has joined the server.
 	@Inject( method = "onPlayerConnect", at = @At( "TAIL" )  )
 	private void onPlayerConnect( ClientConnection connection, ServerPlayerEntity player, CallbackInfo callbackInfo ) {
 
@@ -44,7 +44,7 @@ public class PlayerManagerMixin {
 
 	}
 
-	// Runs when a player leaves the server.
+	// Runs when a player has left the server.
 	@Inject( method = "remove", at = @At( "TAIL" ) )
 	private void remove( ServerPlayerEntity player, CallbackInfo callbackInfo ) {
 

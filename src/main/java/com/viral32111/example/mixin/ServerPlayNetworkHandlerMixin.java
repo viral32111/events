@@ -1,6 +1,6 @@
 package com.viral32111.example.mixin;
 
-import com.viral32111.example.Example;
+import com.viral32111.example.callback.PlayerChatMessageCallback;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -22,18 +22,9 @@ public class ServerPlayNetworkHandlerMixin {
 	@Inject( method = "onChatMessage", at = @At( "TAIL" ) )
 	private void onChatMessage( ChatMessageC2SPacket packet, CallbackInfo callbackInfo ) {
 
-		// The player's account username and unique identifier.
-		String playerName = player.getName().getString();
-		String playerUUID = player.getUuidAsString();
-
-		// The content of the chat message.
-		String messageContent = packet.chatMessage();
-
-		// Is the message signed?
-		boolean isSigned = packet.signature() != null && packet.signature().data().length > 0;
-
-		// Print a message to the server's console with details of this event.
-		Example.Companion.getLOGGER().info( String.format( "Player '%s' (%s) sent chat message '%s' (Signed: %b).", playerName, playerUUID, messageContent, isSigned ) );
+		// Invoke all listeners of this mixin's callback
+		// No need to check the listener results as this mixin cannot be cancelled
+		PlayerChatMessageCallback.Companion.getEVENT().invoker().interact( player, packet );
 
 	}
 

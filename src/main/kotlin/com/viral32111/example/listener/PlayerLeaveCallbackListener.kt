@@ -4,7 +4,7 @@ import com.viral32111.example.Example.Companion.LOGGER
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.ActionResult
 
-// Runs when a player leaves the server.
+// Runs when a player has left the server.
 fun playerLeaveCallbackListener( player: ServerPlayerEntity ): ActionResult {
 
 	// The player's username and unique identifier.
