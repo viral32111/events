@@ -1,8 +1,7 @@
-package com.viral32111.example.mixin;
+package com.viral32111.example.mixins;
 
 import com.viral32111.example.Example;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
-import net.minecraft.network.packet.c2s.play.RequestChatPreviewC2SPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,15 +30,16 @@ public class ServerPlayNetworkHandlerMixin {
 		String messageContent = packet.chatMessage();
 
 		// Is the message signed?
-		boolean isSigned = !packet.signature().isEmpty();
+		boolean isSigned = packet.signature() != null && packet.signature().data().length > 0;
 
 		// Print a message to the server's console with details of this event.
-		Example.LOGGER.info( String.format( "Player '%s' (%s) sent chat message '%s' (Signed: %b).", playerName, playerUUID, messageContent, isSigned ) );
+		Example.INSTANCE.getLOGGER().info( String.format( "Player '%s' (%s) sent chat message '%s' (Signed: %b).", playerName, playerUUID, messageContent, isSigned ) );
 
 	}
 
-	// Runs when a player has typed a character in their chatbox.
+	// Runs when a player has typed a character in their chat-box.
 	// NOTE: Does not run if the player disables chat previews on their client, or if the server has chat previews disabled.
+	/*
 	@Inject( method = "onRequestChatPreview", at = @At( "RETURN" ) )
 	private void onRequestChatPreview( RequestChatPreviewC2SPacket packet, CallbackInfo callbackInfo ) {
 
@@ -51,8 +51,9 @@ public class ServerPlayNetworkHandlerMixin {
 		String previewContent = packet.query();
 
 		// Print a message to the server's console with details of this event.
-		Example.LOGGER.info( String.format( "Player '%s' (%s) typed '%s' in chat.", playerName, playerUUID, previewContent ) );
+		Example.INSTANCE.getLOGGER().info( String.format( "Player '%s' (%s) typed '%s' in chat.", playerName, playerUUID, previewContent ) );
 
 	}
+	*/
 
 }

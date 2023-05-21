@@ -1,19 +1,16 @@
 # Gradle
 .gradle/
-build/
-out/
-classes/
 
-# IntelliJ
+# IntelliJ IDEA
 .idea/
 *.iml
 *.ipr
 *.iws
+
+# Builds
+classes/
+build/
 out/
-
-# Fabric
-run/
-remappedSrc/
-
-# VS Code
 bin/
+run/
+*.jar

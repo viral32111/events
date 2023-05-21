@@ -2,10 +2,10 @@
 	"schemaVersion": 1,
 
 	"id": "example",
-	"version": "${version}",
+	"version": "${ version }",
 
-	"name": "Example Mod",
-	"description": "An example mod for Fabric to document common mixins.",
+	"name": "Example",
+	"description": "An example mod to document mixins.",
 	"authors": [ {
 		"name": "viral32111",
 		"contact": {
@@ -15,15 +15,18 @@
 	} ],
 	"contributors": [],
 	"contact": {
-		"homepage": "https://github.com/viral32111/ExampleMod",
-		"sources": "https://github.com/viral32111/ExampleMod",
-		"issues": "https://github.com/viral32111/ExampleMod/issues"
+		"homepage": "https://github.com/viral32111/example-mod",
+		"sources": "https://github.com/viral32111/example-mod",
+		"issues": "https://github.com/viral32111/example-mod/issues"
 	},
 	"license": "Unlicense",
 
 	"environment": "server",
 	"entrypoints": {
-		"server": [ "com.viral32111.example.Example" ]
+		"server": [ {
+			"adapter": "kotlin",
+			"value": "com.viral32111.example.Example"
+		} ]
 	},
 	"mixins": [ {
 		"environment": "server",
@@ -31,10 +34,12 @@
 	} ],
 
 	"depends": {
-		"fabricloader": ">=0.14.9",
-		"fabric-api": "*",
-		"minecraft": "~1.19.2",
-		"java": ">=17"
+		"java": ">=${ java }",
+		"minecraft": ">=${ minecraft }",
+		"fabricloader": ">=${ fabricloader }",
+		"fabric-api": ">=${ fabric_api }",
+		"fabric-language-kotlin": ">=${ fabric_language_kotlin }"
 	},
 	"suggests": {}
+
 }
