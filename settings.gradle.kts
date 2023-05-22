@@ -13,5 +13,3 @@ pluginManagement {
 		kotlin( "jvm" ).version( System.getProperty( "kotlin_version" ) )
 	}
 }
-
-include( ":api" )
