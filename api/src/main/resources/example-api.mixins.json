@@ -1,7 +1,7 @@
 {
 	"required": true,
 	"minVersion": "0.8",
-	"package": "com.viral32111.example.mixin",
+	"package": "com.viral32111.example.api.mixin",
 	"compatibilityLevel": "JAVA_${ java }",
 	"verbose": true,
 	"injectors": {
@@ -10,5 +10,9 @@
 
 	"mixins": [],
 	"client": [],
-	"server": []
+	"server": [
+		"PlayerManagerMixin",
+		"ServerPlayerEntityMixin",
+		"ServerPlayNetworkHandlerMixin"
+	]
 }

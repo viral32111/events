@@ -1,6 +1,6 @@
 package com.viral32111.example
 
-import com.viral32111.example.callback.*
+import com.viral32111.example.api.callback.*
 import com.viral32111.example.listener.*
 import net.fabricmc.api.DedicatedServerModInitializer
 import org.slf4j.Logger

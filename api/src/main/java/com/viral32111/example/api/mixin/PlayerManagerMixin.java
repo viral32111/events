@@ -1,9 +1,9 @@
-package com.viral32111.example.mixin;
+package com.viral32111.example.api.mixin;
 
 import com.mojang.authlib.GameProfile;
-import com.viral32111.example.callback.PlayerCanJoinCallback;
-import com.viral32111.example.callback.PlayerJoinCallback;
-import com.viral32111.example.callback.PlayerLeaveCallback;
+import com.viral32111.example.api.callback.PlayerCanJoinCallback;
+import com.viral32111.example.api.callback.PlayerJoinCallback;
+import com.viral32111.example.api.callback.PlayerLeaveCallback;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;

@@ -9,7 +9,9 @@ pluginManagement {
 	}
 
 	plugins {
-		id( "fabric-loom" ).version(settings.extra[ "loom_version" ] as String )
+		id( "fabric-loom" ).version( settings.extra[ "loom_version" ] as String )
 		kotlin( "jvm" ).version( System.getProperty( "kotlin_version" ) )
 	}
 }
+
+include( ":api" )

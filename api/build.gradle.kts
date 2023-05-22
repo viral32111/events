@@ -1,13 +1,15 @@
 plugins {
 	id( "fabric-loom" )
 	kotlin( "jvm" ).version( System.getProperty( "kotlin_version" ) )
+
+	id( "maven-publish" )
 }
 
 base {
-	archivesName.set( project.extra[ "archives_base_name" ] as String )
+	archivesName.set( ( project.extra[ "archives_base_name" ] as String ) + "-api" )
 }
 version = project.extra[ "mod_version" ] as String
-group = project.extra[ "maven_group" ] as String
+group = ( project.extra[ "maven_group" ] as String ) + ".api"
 
 repositories {}
 
@@ -27,9 +29,6 @@ dependencies {
 
 	// Kotlin support for Fabric - https://github.com/FabricMC/fabric-language-kotlin
 	modImplementation( "net.fabricmc", "fabric-language-kotlin", project.extra[ "fabric_language_kotlin_version" ] as String )
-
-	// API
-	implementation( project( ":api" ) )
 
 }
 
@@ -87,5 +86,24 @@ tasks {
 		targetCompatibility = javaVersion
 
 		withSourcesJar()
+	}
+}
+
+publishing {
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = uri( "https://maven.pkg.github.com/viral32111/example-mod" )
+			credentials {
+				username = project.findProperty( "gpr.user" ) as String? ?: System.getenv( "GPR_USERNAME" )
+				password = project.findProperty( "gpr.key" ) as String? ?: System.getenv( "GPR_TOKEN" )
+			}
+		}
+	}
+
+	publications {
+		register<MavenPublication>( "gpr" ) {
+			from( components[ "java" ] )
+		}
 	}
 }

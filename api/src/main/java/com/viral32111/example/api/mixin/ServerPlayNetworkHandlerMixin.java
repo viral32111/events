@@ -1,6 +1,6 @@
-package com.viral32111.example.mixin;
+package com.viral32111.example.api.mixin;
 
-import com.viral32111.example.callback.PlayerChatMessageCallback;
+import com.viral32111.example.api.callback.PlayerChatMessageCallback;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;

@@ -1,6 +1,6 @@
-package com.viral32111.example.mixin;
+package com.viral32111.example.api.mixin;
 
-import com.viral32111.example.callback.PlayerDeathCallback;
+import com.viral32111.example.api.callback.PlayerDeathCallback;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

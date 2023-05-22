@@ -1,4 +1,4 @@
-package com.viral32111.example.callback
+package com.viral32111.example.api.callback
 
 import com.mojang.authlib.GameProfile
 import net.fabricmc.fabric.api.event.Event

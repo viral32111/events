@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
 
-	"id": "example",
+	"id": "example-api",
 	"version": "${ version }",
 
-	"name": "Example",
-	"description": "An example mod to document mixins.",
+	"name": "Example API",
+	"description": "An example API to document mixins.",
 	"authors": [ {
 		"name": "viral32111",
 		"contact": {
@@ -22,15 +22,10 @@
 	"license": "Unlicense",
 
 	"environment": "server",
-	"entrypoints": {
-		"server": [ {
-			"adapter": "kotlin",
-			"value": "com.viral32111.example.Example"
-		} ]
-	},
+	"entrypoints": {},
 	"mixins": [ {
 		"environment": "server",
-		"config": "example.mixins.json"
+		"config": "example-api.mixins.json"
 	} ],
 
 	"depends": {
@@ -38,8 +33,7 @@
 		"minecraft": ">=${ minecraft }",
 		"fabricloader": ">=${ fabricloader }",
 		"fabric-api": ">=${ fabric_api }",
-		"fabric-language-kotlin": ">=${ fabric_language_kotlin }",
-		"example-api": ">=0.2.0"
+		"fabric-language-kotlin": ">=${ fabric_language_kotlin }"
 	},
 	"suggests": {}
 
