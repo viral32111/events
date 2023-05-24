@@ -26,6 +26,7 @@ jobs:
     runs-on: ubuntu-22.04
     permissions:
       contents: read
+      packages: write
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
@@ -52,6 +53,7 @@ jobs:
           path: ./build/libs/*.jar
 
       - name: Publish to Gradle registry
+        if: ${{ github.event_name == 'push' && github.event.pull_request == null && !startsWith( github.ref, 'refs/heads/dependabot/' ) && github.ref_type == 'tag' }}
         uses: gradle/gradle-build-action@v2
         env:
           USERNAME: ${{ github.repository_owner }}
@@ -59,3 +61,29 @@ jobs:
         with:
           arguments: publish
           cache-disabled: true
+
+  release:
+    name: Release
+    runs-on: ubuntu-22.04
+    needs: build-publish
+    if: ${{ github.event_name == 'push' && github.event.pull_request == null && !startsWith( github.ref, 'refs/heads/dependabot/' ) && github.ref_type == 'tag' }}
+    permissions:
+      contents: write
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ./artifact/
+
+      - name: Create draft release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          tag_name: ${{ github.ref_name }}
+          body: ${{ github.ref_name }}
+          files: ./artifact/*.jar
+          token: ${{ secrets.GITHUB_TOKEN }}
