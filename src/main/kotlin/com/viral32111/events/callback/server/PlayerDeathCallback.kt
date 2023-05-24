@@ -9,6 +9,7 @@ import net.minecraft.util.ActionResult
 /**
  * Callback for after a player dies.
  * @see com.viral32111.events.mixin.server.ServerPlayerEntityMixin.onDeath
+ * @see com.viral32111.events.listener.server.playerDeathCallbackListener
  * @since 0.2.0
  */
 fun interface PlayerDeathCallback {

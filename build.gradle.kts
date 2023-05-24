@@ -48,8 +48,8 @@ tasks {
 	}
 
 	jar {
-		from( "LICENSE" ) {
-			rename { "${ it }_${ base.archivesName.get() }" }
+		from( "LICENSE.txt" ) {
+			rename { "${ it }_${ base.archivesName.get() }.txt" }
 		}
 	}
 
@@ -96,8 +96,8 @@ publishing {
 			url = uri( project.extra[ "maven_repository_url" ] as String )
 
 			credentials {
-				username = project.findProperty( "gpr.user" ) as String? ?: System.getenv( "GPR_USERNAME" )
-				password = project.findProperty( "gpr.key" ) as String? ?: System.getenv( "GPR_TOKEN" )
+				username = project.findProperty( "gpr.user" ) as String? ?: System.getenv( "USERNAME" )
+				password = project.findProperty( "gpr.key" ) as String? ?: System.getenv( "TOKEN" )
 			}
 		}
 	}

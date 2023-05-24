@@ -9,6 +9,7 @@ import java.net.SocketAddress
 /**
  * Callback for when a player attempts to join the server (before ban & whitelist checks).
  * @see com.viral32111.events.mixin.server.PlayerManagerMixin.checkCanJoin
+ * @see com.viral32111.events.listener.server.playerCanJoinCallbackListener
  * @since 0.2.0
  */
 fun interface PlayerCanJoinCallback {

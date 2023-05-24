@@ -6,7 +6,7 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.ActionResult
 
 /**
- * Runs when a player has sent a message in chat.
+ * Runs when a player has sent a chat message.
  * @param player The player who sent the chat message.
  * @param packet Data about the chat message. Includes content, signature, etc.
  * @return Pass to allow other callback listeners to be executed, fail to prevent their execution.

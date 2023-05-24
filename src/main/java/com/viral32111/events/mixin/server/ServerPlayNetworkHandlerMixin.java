@@ -18,7 +18,7 @@ public class ServerPlayNetworkHandlerMixin {
 	public ServerPlayerEntity player;
 
 	/**
-	 * Runs when a player has sent a message in chat.
+	 * Runs when a player has sent a chat message.
 	 * This will run for signed & unsigned messages. Signed messages have a valid .signature().
 	 * @param packet Data about the chat message. Includes content, signature, etc.
 	 * @see com.viral32111.events.callback.server.PlayerChatMessageCallback

@@ -9,6 +9,7 @@ import net.minecraft.util.ActionResult
 /**
  * Callback for after a player joins the server.
  * @see com.viral32111.events.mixin.server.PlayerManagerMixin.onPlayerConnect
+ * @see com.viral32111.events.listener.server.playerJoinCallbackListener
  * @since 0.2.0
  */
 fun interface PlayerJoinCallback {

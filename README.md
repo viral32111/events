@@ -10,7 +10,88 @@ The mixins in this mod are accurate as of release **1.19.4**. Feel free to submi
 
 I found it frustrating constantly searching through mapped Minecraft source code for the right function to hook into every time I need to write a mixin. They are not documented enough in my opinion, so this project serves as a place for me to house all the mixins I come across while developing my mods.
 
-This mod was rewritten using Kotlin in May 2023. See [0.1.0](https://github.com/viral32111/example-mod/tree/0.1.0) for the Java version.
+## History
+
+This project was originally a demonstration of how to use common mixins in Java around June 2022. See [tag 0.1.0](https://github.com/viral32111/example-mod/tree/0.1.0).
+
+It was later rewritten using [Kotlin for Fabric](https://github.com/FabricMC/fabric-language-kotlin) around May 2023. See [0.2.0](https://github.com/viral32111/example-mod/tree/0.2.0).
+
+Finally, it was converted into an API that other mods can depend on. See [main](https://github.com/viral32111/example-mod/tree/main).
+
+## Callbacks
+
+Documentation & examples for each callback are provided within the source code. The following callbacks are available:
+
+* Server
+  * [`PlayerCanJoinCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerCanJoinCallback.kt) - When a player attempts to join the server.
+  * [`PlayerJoinCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerJoinCallback.kt) - When a player has joined the server.
+  * [`PlayerLeaveCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerLeaveCallback.kt) - When a player has left the server.
+  * [`PlayerDeathCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerDeathCallback.kt) - When a player has died.
+  * [`PlayerChatMessageCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerChatMessageCallback.kt) - When a player has sent a chat message.
+
+## Usage
+
+Firstly, add this repository's Gradle package registry to your Gradle configuration.
+
+Gradle Groovy:
+```groovy
+repositories {
+    maven {
+        url = uri( "https://maven.pkg.github.com/viral32111/events" )
+        credentials {
+            username = project.findProperty( "gpr.user" ) ?: System.getenv( "USERNAME" )
+            password = project.findProperty( "gpr.key" ) ?: System.getenv( "TOKEN" )
+        }
+    }
+}
+```
+
+Kotlin DSL:
+
+```kotlin
+repositories {
+	maven {
+		url = uri( "https://maven.pkg.github.com/viral32111/events" )
+		credentials {
+			username = project.findProperty( "gpr.user" ) as String? ?: System.getenv( "USERNAME" )
+			password = project.findProperty( "gpr.key" ) as String? ?: System.getenv( "TOKEN" )
+		}
+	}
+}
+```
+
+Next, add this mod as a dependency in your Gradle configuration.
+
+Gradle Groovy:
+
+```groovy
+dependencies {
+    implementation 'com.viral32111.events:0.3.0'
+}
+```
+
+Kotlin DSL:
+```kotlin
+dependencies {
+	implementation( "com.viral32111.events", "events", "0.3.0" )
+}
+```
+
+Finally, import this mod's package in your source code.
+
+Java:
+```java
+import com.viral32111.events.callback.*;
+import com.viral32111.events.callback.server.*;
+import com.viral32111.events.callback.client.*;
+```
+
+Kotlin:
+```kotlin
+import com.viral32111.events.callback.*
+import com.viral32111.events.callback.server.*
+import com.viral32111.events.callback.client.*
+```
 
 ## License
 

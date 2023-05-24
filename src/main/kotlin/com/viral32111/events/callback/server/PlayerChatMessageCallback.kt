@@ -7,8 +7,9 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.ActionResult
 
 /**
- * Callback for after a player sends a message in chat.
+ * Callback for after a player sends a chat message.
  * @see com.viral32111.events.mixin.server.ServerPlayNetworkHandlerMixin.onChatMessage
+ * @see com.viral32111.events.listener.server.playerChatMessageCallbackListener
  * @since 0.2.0
  */
 fun interface PlayerChatMessageCallback {
@@ -26,7 +27,7 @@ fun interface PlayerChatMessageCallback {
 	}
 
 	/**
-	 * Runs when a player has sent a message in chat.
+	 * Runs when a player has sent a chat message.
 	 * @param player The player who sent the chat message.
 	 * @param packet Data about the chat message. Includes content, signature, etc.
 	 * @return Pass to allow other callback listeners to be executed, fail to prevent their execution.
