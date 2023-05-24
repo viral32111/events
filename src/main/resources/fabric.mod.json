@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
 
-	"id": "example",
+	"id": "events",
 	"version": "${ version }",
 
-	"name": "Example",
-	"description": "An example mod to document mixins.",
+	"name": "Events",
+	"description": "Callbacks for frequently used mixins.",
 	"authors": [ {
 		"name": "viral32111",
 		"contact": {
@@ -15,22 +15,30 @@
 	} ],
 	"contributors": [],
 	"contact": {
-		"homepage": "https://github.com/viral32111/example-mod",
-		"sources": "https://github.com/viral32111/example-mod",
-		"issues": "https://github.com/viral32111/example-mod/issues"
+		"homepage": "https://github.com/viral32111/events",
+		"sources": "https://github.com/viral32111/events",
+		"issues": "https://github.com/viral32111/events/issues"
 	},
-	"license": "Unlicense",
+	"license": "AGPL-3.0-only",
 
-	"environment": "server",
+	"environment": "*",
 	"entrypoints": {
+		"main": [ {
+			"adapter": "kotlin",
+			"value": "com.viral32111.events.Main"
+		} ],
 		"server": [ {
 			"adapter": "kotlin",
-			"value": "com.viral32111.example.Example"
+			"value": "com.viral32111.events.Server"
+		} ],
+		"client": [ {
+			"adapter": "kotlin",
+			"value": "com.viral32111.events.Client"
 		} ]
 	},
 	"mixins": [ {
-		"environment": "server",
-		"config": "example.mixins.json"
+		"environment": "*",
+		"config": "events.mixins.json"
 	} ],
 
 	"depends": {
@@ -38,8 +46,7 @@
 		"minecraft": ">=${ minecraft }",
 		"fabricloader": ">=${ fabricloader }",
 		"fabric-api": ">=${ fabric_api }",
-		"fabric-language-kotlin": ">=${ fabric_language_kotlin }",
-		"example-api": ">=0.2.0"
+		"fabric-language-kotlin": ">=${ fabric_language_kotlin }"
 	},
 	"suggests": {}
 

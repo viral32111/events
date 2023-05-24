@@ -1,5 +1,6 @@
 plugins {
 	id( "fabric-loom" )
+	id( "maven-publish" )
 	kotlin( "jvm" ).version( System.getProperty( "kotlin_version" ) )
 }
 
@@ -27,9 +28,6 @@ dependencies {
 
 	// Kotlin support for Fabric - https://github.com/FabricMC/fabric-language-kotlin
 	modImplementation( "net.fabricmc", "fabric-language-kotlin", project.extra[ "fabric_language_kotlin_version" ] as String )
-
-	// API
-	implementation( project( ":api" ) )
 
 }
 
@@ -87,5 +85,26 @@ tasks {
 		targetCompatibility = javaVersion
 
 		withSourcesJar()
+	}
+}
+
+// https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#example-using-kotlin-dsl-for-a-single-package-in-the-same-repository
+publishing {
+	repositories {
+		maven {
+			name = project.extra[ "maven_repository_name" ] as String
+			url = uri( project.extra[ "maven_repository_url" ] as String )
+
+			credentials {
+				username = project.findProperty( "gpr.user" ) as String? ?: System.getenv( "GPR_USERNAME" )
+				password = project.findProperty( "gpr.key" ) as String? ?: System.getenv( "GPR_TOKEN" )
+			}
+		}
+	}
+
+	publications {
+		register<MavenPublication>( "gpr" ) {
+			from( components[ "java" ] )
+		}
 	}
 }
