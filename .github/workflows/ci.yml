@@ -18,11 +18,11 @@ on:
   workflow_dispatch:
 
 env:
-  ARTIFACT_NAME: example-mod
+  ARTIFACT_NAME: events
 
 jobs:
-  build:
-    name: Build
+  build-publish:
+    name: Build & Publish
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -50,3 +50,12 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ./build/libs/*.jar
+
+      - name: Publish to Gradle registry
+        uses: gradle/gradle-build-action@v2
+        env:
+          USERNAME: ${{ github.repository_owner }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          arguments: publish
+          cache-disabled: true
