@@ -66,7 +66,7 @@ Gradle Groovy:
 
 ```groovy
 dependencies {
-  implementation 'com.viral32111.events:0.3.0'
+  implementation "com.viral32111.events:0.3.0"
 }
 ```
 
