@@ -5,6 +5,7 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.ActionResult
 import java.util.*
+import kotlin.math.roundToInt
 
 /**
  * Runs when a player has died.
@@ -26,9 +27,9 @@ fun playerDeathCallbackListener( player: ServerPlayerEntity, damageSource: Damag
 	val playerUUID = player.uuidAsString
 
 	// The player's position at the time of death.
-	val playerPosX = player.pos.getX()
-	val playerPosY = player.pos.getY()
-	val playerPosZ = player.pos.getZ()
+	val playerPosX = player.pos.getX().roundToInt()
+	val playerPosY = player.pos.getY().roundToInt()
+	val playerPosZ = player.pos.getZ().roundToInt()
 
 	// The reason for the player's death.
 	// NOTE: This is not the same as the death message! Use 'damageSource.getDeathMessage( player ).getString()' for that.
@@ -45,7 +46,7 @@ fun playerDeathCallbackListener( player: ServerPlayerEntity, damageSource: Damag
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) died due to OUTOFWORLD, at 62, 63, -136.
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) died due to Arrow of Skeleton, at 62, 64, -131.
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) died due to Creeper, at 68, 63, -141.
-	Main.LOGGER.info( "Player '%s' (%s) died due to %s, at %.0f, %.0f, %.0f.".format( playerName, playerUUID, deathReason, playerPosX, playerPosY, playerPosZ ) )
+	Main.LOGGER.info( "Player '${ playerName }' (${ playerUUID }) died due to '${ deathReason }' at [${ playerPosX }, ${ playerPosY }, ${ playerPosZ }]." )
 
 	// Pass to allow other listeners to execute.
 	return ActionResult.PASS

@@ -29,7 +29,7 @@ fun playerCanJoinCallbackListener( socketAddress: SocketAddress, gameProfile: Ga
 
 	// Display a console message with details of this event.
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) is attempting to join from 127.0.0.1:56346.
-	Main.LOGGER.info( "Player '%s' (%s) is attempting to join from %s:%d.".format( playerName, playerUUID, sourceIP, sourcePort ) )
+	Main.LOGGER.info( "Player '${ playerName }' (${ playerUUID }) is attempting to join from '${ sourceIP }:${ sourcePort }'." )
 
 	// Pass to allow other listeners to execute.
 	// ActionResult.FAIL will prevent the player from joining (and other listeners from executing).

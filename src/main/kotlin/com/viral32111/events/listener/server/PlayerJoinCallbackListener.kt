@@ -5,6 +5,7 @@ import net.minecraft.network.ClientConnection
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.ActionResult
 import java.net.InetSocketAddress
+import kotlin.math.roundToInt
 
 /**
  * Runs when a player has joined the server.
@@ -28,13 +29,13 @@ fun playerJoinCallbackListener( connection: ClientConnection, player: ServerPlay
 	val playerUUID = player.uuidAsString
 
 	// The player's position (where they logged in).
-	val playerPosX = player.pos.getX()
-	val playerPosY = player.pos.getY()
-	val playerPosZ = player.pos.getZ()
+	val playerPosX = player.pos.getX().roundToInt()
+	val playerPosY = player.pos.getY().roundToInt()
+	val playerPosZ = player.pos.getZ().roundToInt()
 
 	// Display a console message with details of this event.
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) joined from 127.0.0.1:56346 (at 62, 63, -135).
-	Main.LOGGER.info( "Player '%s' (%s) joined from %s:%d (at %.0f, %.0f, %.0f).".format( playerName, playerUUID, sourceIP, sourcePort, playerPosX, playerPosY, playerPosZ ) )
+	Main.LOGGER.info( "Player '${ playerName }' (${ playerUUID }) joined from '${ sourceIP }:${ sourcePort }' at [${ playerPosX }, ${ playerPosY }, ${ playerPosZ }]." )
 
 	// Pass to allow other listeners to execute.
 	return ActionResult.PASS
