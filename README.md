@@ -20,7 +20,7 @@ Finally, it was converted into an API that other mods can depend on. See [main](
 
 ## Callbacks
 
-Documentation & examples for each callback are provided within the source code. The following callbacks are available:
+Documentation for each callback is written within the source code as comments.
 
 * Server
   * [`PlayerCanJoinCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerCanJoinCallback.kt) - When a player attempts to join the server.
@@ -36,13 +36,13 @@ Firstly, add this repository's Gradle package registry to your Gradle configurat
 Gradle Groovy:
 ```groovy
 repositories {
-    maven {
-        url = uri( "https://maven.pkg.github.com/viral32111/events" )
-        credentials {
-            username = project.findProperty( "gpr.user" ) ?: System.getenv( "USERNAME" )
-            password = project.findProperty( "gpr.key" ) ?: System.getenv( "TOKEN" )
-        }
+  maven {
+    url = uri( "https://maven.pkg.github.com/viral32111/events" )
+    credentials {
+      username = project.findProperty( "gpr.user" ) ?: System.getenv( "USERNAME" )
+      password = project.findProperty( "gpr.key" ) ?: System.getenv( "TOKEN" )
     }
+  }
 }
 ```
 
@@ -50,13 +50,13 @@ Kotlin DSL:
 
 ```kotlin
 repositories {
-	maven {
-		url = uri( "https://maven.pkg.github.com/viral32111/events" )
-		credentials {
-			username = project.findProperty( "gpr.user" ) as String? ?: System.getenv( "USERNAME" )
-			password = project.findProperty( "gpr.key" ) as String? ?: System.getenv( "TOKEN" )
-		}
-	}
+  maven {
+    url = uri( "https://maven.pkg.github.com/viral32111/events" )
+    credentials {
+      username = project.findProperty( "gpr.user" ) as String? ?: System.getenv( "USERNAME" )
+      password = project.findProperty( "gpr.key" ) as String? ?: System.getenv( "TOKEN" )
+    }
+  }
 }
 ```
 
@@ -66,14 +66,14 @@ Gradle Groovy:
 
 ```groovy
 dependencies {
-    implementation 'com.viral32111.events:0.3.0'
+  implementation 'com.viral32111.events:0.3.0'
 }
 ```
 
 Kotlin DSL:
 ```kotlin
 dependencies {
-	implementation( "com.viral32111.events", "events", "0.3.0" )
+  implementation( "com.viral32111.events", "events", "0.3.0" )
 }
 ```
 
