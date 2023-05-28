@@ -102,8 +102,41 @@ publishing {
 		}
 	}
 
+	// https://docs.gradle.org/current/userguide/publishing_maven.html
 	publications {
-		register<MavenPublication>( "gpr" ) {
+		create<MavenPublication>( "gpr" ) {
+			groupId = project.extra[ "maven_group" ] as String
+			artifactId = project.extra[ "archives_base_name" ] as String
+			version = project.extra[ "mod_version" ] as String
+
+			pom {
+				name.set( "Events" )
+				description.set( "Minecraft mod with callbacks for commonly used mixins." )
+				url.set( "https://github.com/viral32111/events" )
+
+				licenses {
+					license {
+						name.set( "GNU Affero General Public License v3.0" )
+						url.set( "https://github.com/viral32111/events/blob/main/LICENSE.txt" )
+					}
+				}
+
+				developers {
+					developer {
+						id.set( "viral32111" )
+						name.set( "viral32111" )
+						url.set( "https://viral32111.com" )
+						email.set( "contact@viral32111.com" )
+					}
+				}
+
+				scm {
+					connection.set( "scm:git:git://github.com/viral32111/events.git" )
+					developerConnection.set( "scm:git:git://github.com/viral32111/events.git" )
+					url.set( "https://github.com/viral32111/events" )
+				}
+			}
+
 			from( components[ "java" ] )
 		}
 	}
