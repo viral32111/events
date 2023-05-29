@@ -46,11 +46,25 @@ jobs:
           arguments: build
           cache-disabled: true
 
+      - name: Test project
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: clean test --info
+          cache-disabled: true
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ./build/libs/*.jar
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: |
+            ./build/test-results/
+            ./build/reports/tests/
 
       - name: Publish to Gradle registry
         if: ${{ github.event_name == 'push' && github.event.pull_request == null && !startsWith( github.ref, 'refs/heads/dependabot/' ) && github.ref_type == 'tag' }}

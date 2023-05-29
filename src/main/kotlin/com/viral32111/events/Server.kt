@@ -10,6 +10,18 @@ import java.time.format.DateTimeFormatter
 @Suppress( "UNUSED" )
 class Server: DedicatedServerModInitializer {
 
+	companion object {
+
+		/**
+		 * Gets the current localised date & time.
+		 * @param format The [format](https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html) to return the date & time in.
+		 * @return The formatted date & time.
+		 * @since 0.3.1
+		 */
+		fun getDateTime( format: String = "dd/MM/yyyy HH:mm:ss Z" ): String = ZonedDateTime.now().format( DateTimeFormatter.ofPattern( format ) )
+
+	}
+
 	// Runs when the mod has initialized on the server...
 	override fun onInitializeServer() {
 		Main.LOGGER.info( "Events initialized in the server-side environment." )
@@ -62,13 +74,5 @@ class Server: DedicatedServerModInitializer {
 		}
 
 	}
-
-	/**
-	 * Gets the current localised date & time.
-	 * @param format The [format](https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html) to return the date & time in.
-	 * @return The formatted date & time.
-	 * @since 0.3.1
-	 */
-	private fun getDateTime( format: String = "dd/MM/yyyy HH:mm:ss Z" ) = ZonedDateTime.now().format( DateTimeFormatter.ofPattern( format ) )
 
 }
