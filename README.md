@@ -4,7 +4,7 @@ This is a [Minecraft Fabric](https://fabricmc.net/) mod that adds callbacks usin
 
 This mod does not do much by itself, other than log example messages for each callback. It is designed as a dependency for my other mods.
 
-The mixins in this mod are accurate as of release **1.19.4**. Feel free to submit [pull requests](https://github.com/viral32111/example-mod/pulls) to keep them up-to-date if they break. See the [Gradle properties file](/gradle.properties) for the versions this mod was last built against.
+The mixins in this mod are accurate as of release **1.20**. Feel free to submit [pull requests](https://github.com/viral32111/example-mod/pulls) to keep them up-to-date if they break. See the [Gradle properties file](/gradle.properties) for the versions this mod was last built against.
 
 ## Background
 
@@ -66,14 +66,14 @@ Gradle Groovy:
 
 ```groovy
 dependencies {
-  implementation "com.viral32111.events:0.3.1"
+  implementation "com.viral32111.events:0.3.3"
 }
 ```
 
 Kotlin DSL:
 ```kotlin
 dependencies {
-  implementation( "com.viral32111.events", "events", "0.3.1" )
+  implementation( "com.viral32111.events", "events", "0.3.3" )
 }
 ```
 

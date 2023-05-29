@@ -14,7 +14,6 @@ repositories {}
 
 dependencies {
 
-	testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 	// Minecraft
 	minecraft( "com.mojang", "minecraft", project.extra[ "minecraft_version" ] as String )
 
@@ -31,6 +30,7 @@ dependencies {
 	modImplementation( "net.fabricmc", "fabric-language-kotlin", project.extra[ "fabric_language_kotlin_version" ] as String )
 
 	// Testing
+	testImplementation( "org.junit.jupiter:junit-jupiter:5.8.1" )
 	testImplementation( kotlin( "test" ) )
 
 }
