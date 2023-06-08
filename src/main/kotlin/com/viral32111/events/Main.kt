@@ -24,7 +24,7 @@ class Main: ModInitializer {
 		LOGGER.info( "Events initialized." )
 
 		// Register all shared callback listeners
-		registerPlayerCallbackListeners()
+		//registerPlayerCallbackListeners()
 	}
 
 	/**
