@@ -68,14 +68,14 @@ Gradle Groovy:
 
 ```groovy
 dependencies {
-  implementation "com.viral32111.events:0.3.4"
+  implementation "com.viral32111.events:0.3.5"
 }
 ```
 
 Kotlin DSL:
 ```kotlin
 dependencies {
-  implementation( "com.viral32111.events", "events", "0.3.4" )
+  implementation( "com.viral32111.events", "events", "0.3.5" )
 }
 ```
 
