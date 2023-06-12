@@ -4,7 +4,7 @@ This is a [Minecraft Fabric](https://fabricmc.net/) mod that adds callbacks usin
 
 This mod does not do much by itself, other than log example messages for each callback. It is designed as a dependency for my other mods.
 
-The mixins in this mod are accurate as of release **1.20**. Feel free to submit [pull requests](https://github.com/viral32111/example-mod/pulls) to keep them up-to-date if they break. See the [Gradle properties file](/gradle.properties) for the versions this mod was last built against.
+The mixins in this mod are accurate as of release **1.20.1**. Feel free to submit [pull requests](https://github.com/viral32111/example-mod/pulls) to keep them up-to-date if they break. See the [Gradle properties file](/gradle.properties) for the versions this mod was last built against.
 
 ## Background
 
@@ -28,6 +28,8 @@ Documentation for each callback is written within the source code as comments.
   * [`PlayerLeaveCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerLeaveCallback.kt) - When a player has left the server.
   * [`PlayerDeathCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerDeathCallback.kt) - When a player has died.
   * [`PlayerChatMessageCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerChatMessageCallback.kt) - When a player has sent a chat message.
+  * [`PlayerEnterPortalCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerEnterPortalCallback.kt) - When a player is about to change dimension.
+  * [`PlayerGainExperienceCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerGainExperienceCallback.kt) - When a player has gained experience.
 
 ## Usage
 
@@ -66,14 +68,14 @@ Gradle Groovy:
 
 ```groovy
 dependencies {
-  implementation "com.viral32111.events:0.3.3"
+  implementation "com.viral32111.events:0.3.4"
 }
 ```
 
 Kotlin DSL:
 ```kotlin
 dependencies {
-  implementation( "com.viral32111.events", "events", "0.3.3" )
+  implementation( "com.viral32111.events", "events", "0.3.4" )
 }
 ```
 
