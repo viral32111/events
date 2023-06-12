@@ -20,7 +20,7 @@ fun playerGainExperienceCallbackListener( player: PlayerEntity, experience: Int 
 
 	// Display a console message with details of this event.
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) gained 12 experience.
-	Main.LOGGER.info( "Player '${ playerName }' (${ playerUUID }) gained ${ experience } experience." )
+	Main.LOGGER.info( "Player '${ playerName }' (${ playerUUID }) gained $experience experience." )
 
 	// Pass to allow other listeners to execute.
 	return ActionResult.PASS
