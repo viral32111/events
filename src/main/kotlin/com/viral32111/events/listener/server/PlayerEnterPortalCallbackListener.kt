@@ -37,6 +37,6 @@ fun playerEnterPortalCallbackListener( player: ServerPlayerEntity, destinationWo
 
 	// Pass to allow other listeners to execute.
 	// ActionResult.FAIL will prevent the player from joining (and other listeners from executing).
-	return ActionResult.FAIL
+	return ActionResult.PASS
 
 }
