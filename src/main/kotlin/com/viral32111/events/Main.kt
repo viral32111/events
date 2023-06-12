@@ -5,9 +5,11 @@ import net.fabricmc.fabric.api.event.player.AttackBlockCallback
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.fabricmc.fabric.api.event.player.UseEntityCallback
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.ActionResult
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.lang.IllegalStateException
 import kotlin.math.roundToInt
 
 @Suppress( "UNUSED" )
@@ -16,12 +18,22 @@ class Main: ModInitializer {
 	// A logger writes text to the console & log file.
 	// It is best practice to use your mod id as the logger's name, so it is clear which mod wrote messages.
 	companion object {
-		val LOGGER: Logger = LoggerFactory.getLogger( "events" )
+		private const val MOD_ID = "events"
+		val LOGGER: Logger = LoggerFactory.getLogger( "com.viral32111.$MOD_ID" )
+
+		/**
+		 * Gets the current version of this mod.
+		 * @since 0.3.5
+		 */
+		fun getModVersion(): String =
+			FabricLoader.getInstance().getModContainer( MOD_ID ).orElseThrow {
+				throw IllegalStateException( "Mod container not found" )
+			}.metadata.version.friendlyString
 	}
 
 	// Runs when the mod has initialized...
 	override fun onInitialize() {
-		LOGGER.info( "Events initialized." )
+		LOGGER.info( "Events v${ getModVersion() } initialized." )
 
 		// Register all shared callback listeners
 		//registerPlayerCallbackListeners()
