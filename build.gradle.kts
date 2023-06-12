@@ -1,7 +1,7 @@
 plugins {
 	id( "fabric-loom" )
 	id( "maven-publish" )
-	kotlin( "jvm" ).version( System.getProperty( "kotlin_version" ) )
+	kotlin( "jvm" ) version( System.getProperty( "kotlin_version" ) )
 }
 
 base {
@@ -29,7 +29,7 @@ dependencies {
 	// Kotlin support for Fabric - https://github.com/FabricMC/fabric-language-kotlin
 	modImplementation( "net.fabricmc", "fabric-language-kotlin", project.extra[ "fabric_language_kotlin_version" ] as String )
 
-	// Testing
+	// Unit testing
 	testImplementation( "org.junit.jupiter:junit-jupiter:5.9.3" )
 	testImplementation( kotlin( "test" ) )
 
@@ -63,11 +63,11 @@ tasks {
 		filesMatching( "fabric.mod.json" ) {
 			expand( mutableMapOf(
 				"version" to project.extra[ "mod_version" ] as String,
+				"java" to project.extra[ "java_version" ] as String,
+				"minecraft" to project.extra[ "minecraft_version" ] as String,
 				"fabricloader" to project.extra[ "loader_version" ] as String,
 				"fabric_api" to project.extra[ "fabric_version" ] as String,
-				"fabric_language_kotlin" to project.extra[ "fabric_language_kotlin_version" ] as String,
-				"minecraft" to project.extra[ "minecraft_version" ] as String,
-				"java" to project.extra[ "java_version" ] as String
+				"fabric_language_kotlin" to project.extra[ "fabric_language_kotlin_version" ] as String
 			) )
 		}
 
@@ -119,7 +119,7 @@ publishing {
 
 			pom {
 				name.set( "Events" )
-				description.set( "Minecraft mod with callbacks for commonly used mixins." )
+				description.set( "Minecraft mod adding callbacks for commonly used mixins." )
 				url.set( "https://github.com/viral32111/events" )
 
 				licenses {

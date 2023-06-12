@@ -14,5 +14,6 @@
 		"server.PlayerManagerMixin",
 		"server.ServerPlayerEntityMixin",
 		"server.ServerPlayNetworkHandlerMixin"
+		"server.PlayerEntityMixin"
 	]
 }

@@ -27,8 +27,8 @@ public class ServerPlayNetworkHandlerMixin {
 	@Inject( method = "onChatMessage", at = @At( "TAIL" ) )
 	private void onChatMessage( ChatMessageC2SPacket packet, CallbackInfo callbackInfo ) {
 
-		// Invoke all listeners of this mixin's callback
-		// No need to check the listener results as this mixin cannot be cancelled
+		// Invoke all listeners of this mixin's callback.
+		// No need to check the listener results as this mixin cannot be cancelled.
 		PlayerChatMessageCallback.Companion.getEVENT().invoker().interact( player, packet );
 
 	}

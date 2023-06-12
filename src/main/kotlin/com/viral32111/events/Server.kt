@@ -43,6 +43,8 @@ class Server: DedicatedServerModInitializer {
 		PlayerLeaveCallback.EVENT.register( ::playerLeaveCallbackListener )
 		PlayerDeathCallback.EVENT.register( ::playerDeathCallbackListener )
 		PlayerChatMessageCallback.EVENT.register( ::playerChatMessageCallbackListener )
+		PlayerEnterPortalCallback.EVENT.register( ::playerEnterPortalCallbackListener )
+		PlayerGainExperienceCallback.EVENT.register( ::playerGainExperienceCallbackListener )
 	}
 
 	/**

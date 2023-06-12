@@ -5,7 +5,7 @@
 	"version": "${ version }",
 
 	"name": "Events",
-	"description": "Callbacks for frequently used mixins.",
+	"description": "Callbacks for commonly used mixins.",
 	"authors": [ {
 		"name": "viral32111",
 		"contact": {
