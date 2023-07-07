@@ -42,11 +42,6 @@ fun AdvancementFrame?.getColor(): Int =
 		else -> 0x54FB54 // Advancement Green
 	}
 
-// Idiomatic properties for the methods above
-val AdvancementFrame.text: String? get() = getText()
-val AdvancementFrame.type: String? get() = getType()
-val AdvancementFrame.color: Int get() = getColor()
-
 /** @see getType */
 fun Advancement.getText(): String? = display?.frame?.getText()
 
@@ -55,8 +50,3 @@ fun Advancement.getType(): String? = display?.frame?.getType()
 
 /** @see getColor */
 fun Advancement.getColor(): Int? = display?.frame?.getColor()
-
-// Idiomatic properties for the methods above
-val Advancement.text: String? get() = display?.frame?.getText()
-val Advancement.type: String? get() = display?.frame?.getType()
-val Advancement.color: Int? get() = display?.frame?.getColor()
