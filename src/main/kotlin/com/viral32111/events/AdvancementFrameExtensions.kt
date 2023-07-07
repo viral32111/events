@@ -42,7 +42,7 @@ fun AdvancementFrame?.getColor(): Int =
 		else -> 0x54FB54 // Advancement Green
 	}
 
-/** @see getType */
+/** @see getText */
 fun Advancement.getText(): String? = display?.frame?.getText()
 
 /** @see getType */
