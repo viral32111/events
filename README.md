@@ -30,6 +30,7 @@ Documentation for each callback is written within the source code as comments.
   * [`PlayerChatMessageCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerChatMessageCallback.kt) - When a player has sent a chat message.
   * [`PlayerEnterPortalCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerEnterPortalCallback.kt) - When a player is about to change dimension.
   * [`PlayerGainExperienceCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerGainExperienceCallback.kt) - When a player has gained experience.
+  * [`PlayerCompleteAdvancementCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerGainExperienceCallback.kt) - When a player has completed an advancement (including challenges & goals).
 
 ## Usage
 
