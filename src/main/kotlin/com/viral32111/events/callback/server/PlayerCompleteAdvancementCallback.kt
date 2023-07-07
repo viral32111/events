@@ -38,4 +38,3 @@ fun interface PlayerCompleteAdvancementCallback {
 	 */
 	fun interact( player: ServerPlayerEntity, advancement: Advancement, criterionName: String, shouldAnnounceToChat: Boolean ): ActionResult
 }
-

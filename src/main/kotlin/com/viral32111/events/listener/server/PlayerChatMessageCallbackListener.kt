@@ -26,7 +26,7 @@ fun playerChatMessageCallbackListener( player: ServerPlayerEntity, packet: ChatM
 	val isSigned = packet.signature()?.data?.isNotEmpty()
 
 	// Display a console message with details of this event.
-	Main.LOGGER.info( "Player '${ playerName }' (${ playerUUID }) sent an ${ if ( isSigned == true ) "signed" else "unsigned" } chat message '${ messageContent }'." )
+	Main.LOGGER.info( "Player '$playerName' ($playerUUID) sent an ${ if ( isSigned == true ) "signed" else "unsigned" } chat message '$messageContent'." )
 
 	// Pass to allow other listeners to execute.
 	return ActionResult.PASS

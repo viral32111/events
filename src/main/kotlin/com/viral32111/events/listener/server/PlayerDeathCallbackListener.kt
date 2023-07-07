@@ -46,7 +46,7 @@ fun playerDeathCallbackListener( player: ServerPlayerEntity, damageSource: Damag
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) died due to OUTOFWORLD, at 62, 63, -136.
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) died due to Arrow of Skeleton, at 62, 64, -131.
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) died due to Creeper, at 68, 63, -141.
-	Main.LOGGER.info( "Player '${ playerName }' (${ playerUUID }) died due to '${ deathReason }' at [${ playerPosX }, ${ playerPosY }, ${ playerPosZ }]." )
+	Main.LOGGER.info( "Player '$playerName' ($playerUUID) died due to '$deathReason' at [$playerPosX, $playerPosY, $playerPosZ]." )
 
 	// Pass to allow other listeners to execute.
 	return ActionResult.PASS
