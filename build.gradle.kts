@@ -117,19 +117,9 @@ tasks {
 	}
 }
 
-signing {
-	useInMemoryPgpKeys(
-		project.findProperty( "gpg.keyId" ) as String? ?: System.getenv( "GPG_KEY_ID" ),
-		project.findProperty( "gpg.secretKey" ) as String? ?: System.getenv( "GPG_SECRET_KEY" ),
-		project.findProperty( "gpg.password" ) as String? ?: System.getenv( "GPG_PASSWORD" )
-	)
-
-	sign( publishing.publications )
-}
-
 publishing {
 	repositories {
-		// https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#example-using-kotlin-dsl-for-a-single-package-in-the-same-repository
+		// GitHub Packages - https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#example-using-kotlin-dsl-for-a-single-package-in-the-same-repository
 		maven {
 			name = "GitHubPackages"
 			url = uri( "https://maven.pkg.github.com/viral32111/events" )
@@ -140,7 +130,7 @@ publishing {
 			}
 		}
 
-		// https://central.sonatype.org/publish/publish-gradle/
+		// OSSRH - https://central.sonatype.org/publish/publish-gradle/
 		maven {
 			name = "OSSRH"
 			url = uri( "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/" )
@@ -159,6 +149,7 @@ publishing {
 			artifactId = project.extra[ "archives_base_name" ] as String
 			version = project.extra[ "mod_version" ] as String
 
+			// Metadata
 			pom {
 				name.set( "Events" )
 				description.set( "Minecraft mod adding callbacks for commonly used mixins." )
@@ -187,10 +178,23 @@ publishing {
 				}
 			}
 
+			// Include main & sources JAR
 			from( components[ "java" ] )
 
-			artifact( tasks[ "javadocJar" ] )
-			artifact( tasks[ "sourcesJar" ] )
+			// Include empty JavaDoc JAR
+			artifact( tasks[ "javadocJar" ] ) {
+				classifier = "javadoc"
+			}
 		}
 	}
+}
+
+signing {
+	/*useInMemoryPgpKeys(
+		project.findProperty( "signing.keyId" ) as String? ?: System.getenv( "GPG_KEY_ID" ),
+		project.findProperty( "signing.secretKey" ) as String? ?: System.getenv( "GPG_SECRET_KEY" ),
+		project.findProperty( "signing.password" ) as String? ?: System.getenv( "GPG_PASSWORD" )
+	)*/
+
+	sign( publishing.publications[ "mavenJava" ] )
 }
