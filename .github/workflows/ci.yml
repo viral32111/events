@@ -70,8 +70,8 @@ jobs:
         if: ${{ github.event_name == 'push' && github.event.pull_request == null && !startsWith( github.ref, 'refs/heads/dependabot/' ) && github.ref_type == 'tag' }}
         uses: gradle/gradle-build-action@v2
         env:
-          USERNAME: ${{ github.repository_owner }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GHPKG_USER: ${{ github.repository_owner }}
+          GHPKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           arguments: publish
           cache-disabled: true

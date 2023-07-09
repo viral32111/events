@@ -1,7 +1,10 @@
 plugins {
 	id( "fabric-loom" )
-	id( "maven-publish" )
 	kotlin( "jvm" ) version( System.getProperty( "kotlin_version" ) )
+
+
+	id( "maven-publish" )
+	id( "signing" )
 }
 
 base {
@@ -94,25 +97,64 @@ tasks {
 	test {
 		useJUnitPlatform()
 	}
+
+	/*
+	register<Jar>( "sourcesJar" ) {
+		archiveClassifier.set( "sources" )
+		from( sourceSets[ "main" ].allSource )
+	}
+	*/
+
+	// Empty javadoc JAR
+	register<Jar>( "javadocJar" ) {
+		archiveClassifier.set( "javadoc" )
+
+		includeEmptyDirs = false
+
+		from( "." ) {
+			include( "README.md" )
+		}
+	}
 }
 
-// https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#example-using-kotlin-dsl-for-a-single-package-in-the-same-repository
+signing {
+	useInMemoryPgpKeys(
+		project.findProperty( "gpg.keyId" ) as String? ?: System.getenv( "GPG_KEY_ID" ),
+		project.findProperty( "gpg.secretKey" ) as String? ?: System.getenv( "GPG_SECRET_KEY" ),
+		project.findProperty( "gpg.password" ) as String? ?: System.getenv( "GPG_PASSWORD" )
+	)
+
+	sign( publishing.publications )
+}
+
 publishing {
 	repositories {
+		// https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#example-using-kotlin-dsl-for-a-single-package-in-the-same-repository
 		maven {
-			name = project.extra[ "maven_repository_name" ] as String
-			url = uri( project.extra[ "maven_repository_url" ] as String )
+			name = "GitHubPackages"
+			url = uri( "https://maven.pkg.github.com/viral32111/events" )
 
 			credentials {
-				username = project.findProperty( "gpr.user" ) as String? ?: System.getenv( "USERNAME" )
-				password = project.findProperty( "gpr.key" ) as String? ?: System.getenv( "TOKEN" )
+				username = project.findProperty( "ghpkg.user" ) as String? ?: System.getenv( "GHPKG_USER" )
+				password = project.findProperty( "ghpkg.token" ) as String? ?: System.getenv( "GHPKG_TOKEN" )
+			}
+		}
+
+		// https://central.sonatype.org/publish/publish-gradle/
+		maven {
+			name = "OSSRH"
+			url = uri( "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/" )
+
+			credentials {
+				username = project.findProperty( "ossrh.user" ) as String? ?: System.getenv( "OSSRH_USER" )
+				password = project.findProperty( "ossrh.token" ) as String? ?: System.getenv( "OSSRH_TOKEN" )
 			}
 		}
 	}
 
 	// https://docs.gradle.org/current/userguide/publishing_maven.html
 	publications {
-		create<MavenPublication>( "gpr" ) {
+		create<MavenPublication>( "mavenJava" ) {
 			groupId = project.extra[ "maven_group" ] as String
 			artifactId = project.extra[ "archives_base_name" ] as String
 			version = project.extra[ "mod_version" ] as String
@@ -146,6 +188,9 @@ publishing {
 			}
 
 			from( components[ "java" ] )
+
+			artifact( tasks[ "javadocJar" ] )
+			artifact( tasks[ "sourcesJar" ] )
 		}
 	}
 }
