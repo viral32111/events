@@ -190,11 +190,11 @@ publishing {
 }
 
 signing {
-	/*useInMemoryPgpKeys(
-		project.findProperty( "signing.keyId" ) as String? ?: System.getenv( "GPG_KEY_ID" ),
-		project.findProperty( "signing.secretKey" ) as String? ?: System.getenv( "GPG_SECRET_KEY" ),
-		project.findProperty( "signing.password" ) as String? ?: System.getenv( "GPG_PASSWORD" )
-	)*/
+	useInMemoryPgpKeys(
+		project.findProperty( "signing.keyId" ) as String? ?: System.getenv( "SIGNING_KEY_ID" ),
+		project.findProperty( "signing.secretKey" ) as String? ?: System.getenv( "SIGNING_SECRET_KEY" ),
+		project.findProperty( "signing.password" ) as String? ?: System.getenv( "SIGNING_PASSWORD" )
+	)
 
 	sign( publishing.publications[ "mavenJava" ] )
 }

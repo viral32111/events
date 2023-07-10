@@ -66,15 +66,30 @@ jobs:
       #      ./build/test-results/
       #      ./build/reports/tests/
 
-      - name: Publish to Gradle registry
+      - name: Test publish
+        uses: gradle/gradle-build-action@v2
+        env:
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SIGNING_SECRET_KEY: ${{ secrets.SIGNING_SECRET_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+        with:
+          arguments: publishToMavenLocal
+          cache-disabled: false
+
+      - name: Publish
         if: ${{ github.event_name == 'push' && github.event.pull_request == null && !startsWith( github.ref, 'refs/heads/dependabot/' ) && github.ref_type == 'tag' }}
         uses: gradle/gradle-build-action@v2
         env:
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SIGNING_SECRET_KEY: ${{ secrets.SIGNING_SECRET_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           GHPKG_USER: ${{ github.repository_owner }}
           GHPKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OSSRH_USER: ${{ secrets.OSSRH_USER }}
+          OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
         with:
           arguments: publish
-          cache-disabled: true
+          cache-disabled: false
 
   release:
     name: Release
