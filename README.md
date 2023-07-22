@@ -41,6 +41,10 @@ Documentation for each callback is written within the source code as comments.
 
 ## 📥 Usage
 
+<a href="https://modrinth.com/mod/fabric-api/"><img src="https://github.com/viral32111/discord-relay/assets/19510403/2e0d32ee-b4aa-4d93-9388-4a45639c4a96" height="48" alt="Requires Fabric API"></a>
+<a href="https://modrinth.com/mod/fabric-language-kotlin"><img src="https://github.com/viral32111/discord-relay/assets/19510403/ab7b8cbb-ff80-4359-8fc9-13a2cf62c4bf" height="48" alt="Requires Fabric Language Kotlin"></a>
+<br>
+
 Firstly, add this repository's Gradle package registry to your Gradle configuration.
 
 Gradle Groovy:
