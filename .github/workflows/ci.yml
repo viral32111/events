@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     paths:
-      - 'gradle/**'
+      - 'gradle/**/*'
       - 'gradlew'
       - 'gradlew.bat'
-      - 'src/**'
+      - 'src/**/*'
       - 'build.gradle.kts'
       - 'settings.gradle.kts'
       - 'gradle.properties'
@@ -38,7 +38,7 @@ jobs:
           distribution: temurin
 
       - name: Set Gradle permissions
-        run: chmod +x ./gradlew
+        run: chmod +x gradlew
 
       - name: Build project
         uses: gradle/gradle-build-action@v2
@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ./build/libs/*.jar
+          path: build/libs/*.jar
 
       #- name: Upload test results
       #  uses: actions/upload-artifact@v3
@@ -106,13 +106,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ./artifact/
+          path: artifact
 
       - name: Create draft release
         uses: softprops/action-gh-release@v1
         with:
           draft: true
           tag_name: ${{ github.ref_name }}
-          body: ${{ github.ref_name }}
-          files: ./artifact/*.jar
+          files: artifact/*.jar
           token: ${{ secrets.GITHUB_TOKEN }}
