@@ -39,6 +39,9 @@ jobs:
 
       - name: Build project
         uses: gradle/gradle-build-action@v2
+        env:
+          GHPKG_USER: ${{ github.repository_owner }}
+          GHPKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           arguments: build
           cache-disabled: true
