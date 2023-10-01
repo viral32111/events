@@ -23,7 +23,7 @@ fun playerCompleteAdvancementCallbackListener( player: ServerPlayerEntity, advan
 
 	// The advancement's information.
 	// Take a look at the extension methods in AdvancementFrameExtensions.kt!
-	val advancementName = advancement.display?.title?.string
+	val advancementName = advancement.display?.get()?.title?.string
 	val advancementText = advancement.getText()
 	val advancementType = advancement.getType()
 

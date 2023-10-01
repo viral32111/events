@@ -26,3 +26,6 @@ run/
 .gradle/
 !gradle/wrapper/gradle-wrapper.jar
 local.properties
+
+# Fabric Mappings
+remappedSrc/

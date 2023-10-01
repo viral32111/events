@@ -43,10 +43,10 @@ fun AdvancementFrame?.getColor(): Int =
 	}
 
 /** @see getText */
-fun Advancement.getText(): String? = display?.frame?.getText()
+fun Advancement.getText(): String? = display?.get()?.frame?.getText()
 
 /** @see getType */
-fun Advancement.getType(): String? = display?.frame?.getType()
+fun Advancement.getType(): String? = display?.get()?.frame?.getType()
 
 /** @see getColor */
-fun Advancement.getColor(): Int? = display?.frame?.getColor()
+fun Advancement.getColor(): Int? = display?.get()?.frame?.getColor()

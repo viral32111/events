@@ -2,7 +2,6 @@ plugins {
 	id( "fabric-loom" )
 	kotlin( "jvm" ) version( System.getProperty( "kotlin_version" ) )
 
-
 	id( "maven-publish" )
 	id( "signing" )
 }
