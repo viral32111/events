@@ -13,16 +13,17 @@ import net.minecraft.util.ActionResult
  */
 fun interface PlayerLeaveCallback {
 	companion object {
-		val EVENT: Event<PlayerLeaveCallback> = EventFactory.createArrayBacked( PlayerLeaveCallback::class.java ) { listeners ->
-			PlayerLeaveCallback { player ->
-				for ( listener in listeners ) {
-					val result = listener.interact( player )
-					if ( result != ActionResult.PASS ) return@PlayerLeaveCallback result
-				}
+		val EVENT: Event<PlayerLeaveCallback> =
+			EventFactory.createArrayBacked(PlayerLeaveCallback::class.java) { listeners ->
+				PlayerLeaveCallback { player ->
+					for (listener in listeners) {
+						val result = listener.interact(player)
+						if (result != ActionResult.PASS) return@PlayerLeaveCallback result
+					}
 
-				return@PlayerLeaveCallback ActionResult.PASS
+					return@PlayerLeaveCallback ActionResult.PASS
+				}
 			}
-		}
 	}
 
 	/**
@@ -32,5 +33,5 @@ fun interface PlayerLeaveCallback {
 	 * @see PlayerLeaveCallback
 	 * @since 0.2.0
 	 */
-	fun interact( player: ServerPlayerEntity ): ActionResult
+	fun interact(player: ServerPlayerEntity): ActionResult
 }

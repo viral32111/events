@@ -14,16 +14,17 @@ import net.minecraft.util.ActionResult
  */
 fun interface PlayerChatMessageCallback {
 	companion object {
-		val EVENT: Event<PlayerChatMessageCallback> = EventFactory.createArrayBacked( PlayerChatMessageCallback::class.java ) { listeners ->
-			PlayerChatMessageCallback { player, packet ->
-				for ( listener in listeners ) {
-					val result = listener.interact( player, packet )
-					if ( result != ActionResult.PASS ) return@PlayerChatMessageCallback result
-				}
+		val EVENT: Event<PlayerChatMessageCallback> =
+			EventFactory.createArrayBacked(PlayerChatMessageCallback::class.java) { listeners ->
+				PlayerChatMessageCallback { player, packet ->
+					for (listener in listeners) {
+						val result = listener.interact(player, packet)
+						if (result != ActionResult.PASS) return@PlayerChatMessageCallback result
+					}
 
-				return@PlayerChatMessageCallback ActionResult.PASS
+					return@PlayerChatMessageCallback ActionResult.PASS
+				}
 			}
-		}
 	}
 
 	/**
@@ -34,5 +35,5 @@ fun interface PlayerChatMessageCallback {
 	 * @see PlayerChatMessageCallback
 	 * @since 0.2.0
 	 */
-	fun interact( player: ServerPlayerEntity, packet: ChatMessageC2SPacket ): ActionResult
+	fun interact(player: ServerPlayerEntity, packet: ChatMessageC2SPacket): ActionResult
 }

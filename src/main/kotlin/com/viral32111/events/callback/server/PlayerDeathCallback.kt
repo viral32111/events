@@ -14,16 +14,17 @@ import net.minecraft.util.ActionResult
  */
 fun interface PlayerDeathCallback {
 	companion object {
-		val EVENT: Event<PlayerDeathCallback> = EventFactory.createArrayBacked( PlayerDeathCallback::class.java ) { listeners ->
-			PlayerDeathCallback { player, damageSource ->
-				for ( listener in listeners ) {
-					val result = listener.interact( player, damageSource )
-					if ( result != ActionResult.PASS ) return@PlayerDeathCallback result
-				}
+		val EVENT: Event<PlayerDeathCallback> =
+			EventFactory.createArrayBacked(PlayerDeathCallback::class.java) { listeners ->
+				PlayerDeathCallback { player, damageSource ->
+					for (listener in listeners) {
+						val result = listener.interact(player, damageSource)
+						if (result != ActionResult.PASS) return@PlayerDeathCallback result
+					}
 
-				return@PlayerDeathCallback ActionResult.PASS
+					return@PlayerDeathCallback ActionResult.PASS
+				}
 			}
-		}
 	}
 
 	/**
@@ -34,5 +35,5 @@ fun interface PlayerDeathCallback {
 	 * @see PlayerDeathCallback
 	 * @since 0.2.0
 	 */
-	fun interact( player: ServerPlayerEntity, damageSource: DamageSource ): ActionResult
+	fun interact(player: ServerPlayerEntity, damageSource: DamageSource): ActionResult
 }

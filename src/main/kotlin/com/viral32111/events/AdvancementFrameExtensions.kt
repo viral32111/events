@@ -10,7 +10,7 @@ import net.minecraft.advancement.AdvancementFrame
  * @since 0.3.6
  */
 fun AdvancementFrame?.getText(): String? =
-	when ( this ) {
+	when (this) {
 		AdvancementFrame.TASK -> "has made the advancement"
 		AdvancementFrame.CHALLENGE -> "completed the challenge"
 		AdvancementFrame.GOAL -> "reached the goal"
@@ -24,7 +24,7 @@ fun AdvancementFrame?.getText(): String? =
  * @since 0.3.6
  */
 fun AdvancementFrame?.getType(): String? =
-	when ( this ) {
+	when (this) {
 		AdvancementFrame.TASK -> "Advancement"
 		AdvancementFrame.CHALLENGE -> "Challenge"
 		AdvancementFrame.GOAL -> "Goal"
@@ -37,7 +37,7 @@ fun AdvancementFrame?.getType(): String? =
  * @since 0.3.6
  */
 fun AdvancementFrame?.getColor(): Int =
-	when ( this ) {
+	when (this) {
 		AdvancementFrame.CHALLENGE -> 0xA700A7 // Challenge Purple
 		else -> 0x54FB54 // Advancement Green
 	}

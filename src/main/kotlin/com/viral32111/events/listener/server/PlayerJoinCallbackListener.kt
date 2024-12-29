@@ -15,7 +15,7 @@ import kotlin.math.roundToInt
  * @see com.viral32111.events.callback.server.PlayerCanJoinCallback
  * @since 0.2.0
  */
-fun playerJoinCallbackListener( connection: ClientConnection, player: ServerPlayerEntity ): ActionResult {
+fun playerJoinCallbackListener(connection: ClientConnection, player: ServerPlayerEntity): ActionResult {
 
 	// Cast the connection address to expose address & port properties.
 	val address = connection.address as InetSocketAddress
@@ -35,7 +35,7 @@ fun playerJoinCallbackListener( connection: ClientConnection, player: ServerPlay
 
 	// Display a console message with details of this event.
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) joined from 127.0.0.1:56346 (at 62, 63, -135).
-	Main.LOGGER.info( "Player '$playerName' ($playerUUID) joined from '$sourceIP:$sourcePort' at [$playerPosX, $playerPosY, $playerPosZ]." )
+	Main.LOGGER.info("Player '$playerName' ($playerUUID) joined from '$sourceIP:$sourcePort' at [$playerPosX, $playerPosY, $playerPosZ].")
 
 	// Pass to allow other listeners to execute.
 	return ActionResult.PASS

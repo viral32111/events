@@ -7,17 +7,18 @@ import net.minecraft.util.ActionResult
 
 fun interface PlayerGainExperienceCallback {
 	companion object {
-		val EVENT: Event<PlayerGainExperienceCallback> = EventFactory.createArrayBacked( PlayerGainExperienceCallback::class.java ) { listeners ->
-			PlayerGainExperienceCallback { player, experience ->
-				for ( listener in listeners ) {
-					val result = listener.interact( player, experience )
-					if ( result != ActionResult.PASS ) return@PlayerGainExperienceCallback result
-				}
+		val EVENT: Event<PlayerGainExperienceCallback> =
+			EventFactory.createArrayBacked(PlayerGainExperienceCallback::class.java) { listeners ->
+				PlayerGainExperienceCallback { player, experience ->
+					for (listener in listeners) {
+						val result = listener.interact(player, experience)
+						if (result != ActionResult.PASS) return@PlayerGainExperienceCallback result
+					}
 
-				return@PlayerGainExperienceCallback ActionResult.PASS
+					return@PlayerGainExperienceCallback ActionResult.PASS
+				}
 			}
-		}
 	}
 
-	fun interact( player: PlayerEntity, experience: Int ): ActionResult
+	fun interact(player: PlayerEntity, experience: Int): ActionResult
 }

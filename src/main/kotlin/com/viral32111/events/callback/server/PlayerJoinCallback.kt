@@ -14,16 +14,17 @@ import net.minecraft.util.ActionResult
  */
 fun interface PlayerJoinCallback {
 	companion object {
-		val EVENT: Event<PlayerJoinCallback> = EventFactory.createArrayBacked( PlayerJoinCallback::class.java ) { listeners ->
-			PlayerJoinCallback { connection, player ->
-				for ( listener in listeners ) {
-					val result = listener.interact( connection, player )
-					if ( result != ActionResult.PASS ) return@PlayerJoinCallback result
-				}
+		val EVENT: Event<PlayerJoinCallback> =
+			EventFactory.createArrayBacked(PlayerJoinCallback::class.java) { listeners ->
+				PlayerJoinCallback { connection, player ->
+					for (listener in listeners) {
+						val result = listener.interact(connection, player)
+						if (result != ActionResult.PASS) return@PlayerJoinCallback result
+					}
 
-				return@PlayerJoinCallback ActionResult.PASS
+					return@PlayerJoinCallback ActionResult.PASS
+				}
 			}
-		}
 	}
 
 	/**
@@ -34,5 +35,5 @@ fun interface PlayerJoinCallback {
 	 * @see PlayerJoinCallback
 	 * @since 0.2.0
 	 */
-	fun interact( connection: ClientConnection, player: ServerPlayerEntity ): ActionResult
+	fun interact(connection: ClientConnection, player: ServerPlayerEntity): ActionResult
 }

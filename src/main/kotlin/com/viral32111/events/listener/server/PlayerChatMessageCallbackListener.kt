@@ -13,7 +13,7 @@ import net.minecraft.util.ActionResult
  * @see com.viral32111.events.callback.server.PlayerCanJoinCallback
  * @since 0.2.0
  */
-fun playerChatMessageCallbackListener( player: ServerPlayerEntity, packet: ChatMessageC2SPacket ): ActionResult {
+fun playerChatMessageCallbackListener(player: ServerPlayerEntity, packet: ChatMessageC2SPacket): ActionResult {
 
 	// The player's username and unique identifier.
 	val playerName: String = player.name.string
@@ -26,7 +26,7 @@ fun playerChatMessageCallbackListener( player: ServerPlayerEntity, packet: ChatM
 	val isSigned = packet.signature()?.data?.isNotEmpty()
 
 	// Display a console message with details of this event.
-	Main.LOGGER.info( "Player '$playerName' ($playerUUID) sent ${ if ( isSigned == true ) "signed" else "unsigned" } chat message '$messageContent'." )
+	Main.LOGGER.info("Player '$playerName' ($playerUUID) sent ${if (isSigned == true) "signed" else "unsigned"} chat message '$messageContent'.")
 
 	// Pass to allow other listeners to execute.
 	return ActionResult.PASS

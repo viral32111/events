@@ -15,7 +15,12 @@ import net.minecraft.util.ActionResult
  * @see com.viral32111.events.callback.server.PlayerCompleteAdvancementCallback
  * @since 0.3.6
  */
-fun playerCompleteAdvancementCallbackListener( player: ServerPlayerEntity, advancement: Advancement, criterionName: String, shouldAnnounceToChat: Boolean ): ActionResult {
+fun playerCompleteAdvancementCallbackListener(
+	player: ServerPlayerEntity,
+	advancement: Advancement,
+	criterionName: String,
+	shouldAnnounceToChat: Boolean
+): ActionResult {
 
 	// The player's username and unique identifier.
 	val playerName = player.name.string
@@ -28,7 +33,7 @@ fun playerCompleteAdvancementCallbackListener( player: ServerPlayerEntity, advan
 	val advancementType = advancement.getType()
 
 	// Display a console message with details of this event.
-	Main.LOGGER.info( "Player '$playerName' ($playerUUID) $advancementText '$advancementName' (Criterion: '$criterionName', Type: '$advancementType', Announce: '$shouldAnnounceToChat')." )
+	Main.LOGGER.info("Player '$playerName' ($playerUUID) $advancementText '$advancementName' (Criterion: '$criterionName', Type: '$advancementType', Announce: '$shouldAnnounceToChat').")
 
 	// Pass to allow other listeners to execute.
 	return ActionResult.PASS

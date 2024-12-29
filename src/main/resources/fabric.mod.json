@@ -1,18 +1,18 @@
 {
 	"schemaVersion": 1,
-
 	"id": "events",
 	"version": "${ version }",
-
 	"name": "Events",
 	"description": "Callbacks for commonly used mixins.",
-	"authors": [ {
-		"name": "viral32111",
-		"contact": {
-			"homepage": "https://viral32111.com",
-			"email": "contact@viral32111.com"
+	"authors": [
+		{
+			"name": "viral32111",
+			"contact": {
+				"homepage": "https://viral32111.com",
+				"email": "contact@viral32111.com"
+			}
 		}
-	} ],
+	],
 	"contributors": [],
 	"contact": {
 		"homepage": "https://github.com/viral32111/events",
@@ -20,27 +20,33 @@
 		"issues": "https://github.com/viral32111/events/issues"
 	},
 	"license": "AGPL-3.0-only",
-
 	"environment": "*",
 	"entrypoints": {
-		"main": [ {
-			"adapter": "kotlin",
-			"value": "com.viral32111.events.Main"
-		} ],
-		"server": [ {
-			"adapter": "kotlin",
-			"value": "com.viral32111.events.Server"
-		} ],
-		"client": [ {
-			"adapter": "kotlin",
-			"value": "com.viral32111.events.Client"
-		} ]
+		"main": [
+			{
+				"adapter": "kotlin",
+				"value": "com.viral32111.events.Main"
+			}
+		],
+		"server": [
+			{
+				"adapter": "kotlin",
+				"value": "com.viral32111.events.Server"
+			}
+		],
+		"client": [
+			{
+				"adapter": "kotlin",
+				"value": "com.viral32111.events.Client"
+			}
+		]
 	},
-	"mixins": [ {
-		"environment": "*",
-		"config": "events.mixins.json"
-	} ],
-
+	"mixins": [
+		{
+			"environment": "*",
+			"config": "events.mixins.json"
+		}
+	],
 	"depends": {
 		"java": ">=${ java }",
 		"minecraft": ">=${ minecraft }",
@@ -49,5 +55,4 @@
 		"fabric-language-kotlin": ">=${ fabric_language_kotlin }"
 	},
 	"suggests": {}
-
 }

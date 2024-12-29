@@ -14,16 +14,17 @@ import net.minecraft.util.ActionResult
  */
 fun interface PlayerCompleteAdvancementCallback {
 	companion object {
-		val EVENT: Event<PlayerCompleteAdvancementCallback> = EventFactory.createArrayBacked( PlayerCompleteAdvancementCallback::class.java ) { listeners ->
-			PlayerCompleteAdvancementCallback { player, advancement, criterionName, shouldAnnounceToChat ->
-				for ( listener in listeners ) {
-					val result = listener.interact( player, advancement, criterionName, shouldAnnounceToChat )
-					if ( result != ActionResult.PASS ) return@PlayerCompleteAdvancementCallback result
-				}
+		val EVENT: Event<PlayerCompleteAdvancementCallback> =
+			EventFactory.createArrayBacked(PlayerCompleteAdvancementCallback::class.java) { listeners ->
+				PlayerCompleteAdvancementCallback { player, advancement, criterionName, shouldAnnounceToChat ->
+					for (listener in listeners) {
+						val result = listener.interact(player, advancement, criterionName, shouldAnnounceToChat)
+						if (result != ActionResult.PASS) return@PlayerCompleteAdvancementCallback result
+					}
 
-				return@PlayerCompleteAdvancementCallback ActionResult.PASS
+					return@PlayerCompleteAdvancementCallback ActionResult.PASS
+				}
 			}
-		}
 	}
 
 	/**
@@ -36,5 +37,10 @@ fun interface PlayerCompleteAdvancementCallback {
 	 * @see PlayerChatMessageCallback
 	 * @since 0.3.6
 	 */
-	fun interact( player: ServerPlayerEntity, advancement: Advancement, criterionName: String, shouldAnnounceToChat: Boolean ): ActionResult
+	fun interact(
+		player: ServerPlayerEntity,
+		advancement: Advancement,
+		criterionName: String,
+		shouldAnnounceToChat: Boolean
+	): ActionResult
 }

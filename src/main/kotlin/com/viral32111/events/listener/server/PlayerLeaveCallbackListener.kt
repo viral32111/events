@@ -12,7 +12,7 @@ import kotlin.math.roundToInt
  * @see com.viral32111.events.callback.server.PlayerCanJoinCallback
  * @since 0.2.0
  */
-fun playerLeaveCallbackListener(player: ServerPlayerEntity ): ActionResult {
+fun playerLeaveCallbackListener(player: ServerPlayerEntity): ActionResult {
 
 	// The player's username and unique identifier.
 	val playerName = player.name.string
@@ -25,7 +25,7 @@ fun playerLeaveCallbackListener(player: ServerPlayerEntity ): ActionResult {
 
 	// Display a console message with details of this event.
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) left (at 74, 63, -136).
-	Main.LOGGER.info( "Player '$playerName' ($playerUUID) left at [$playerPosX, $playerPosY, $playerPosZ]." )
+	Main.LOGGER.info("Player '$playerName' ($playerUUID) left at [$playerPosX, $playerPosY, $playerPosZ].")
 
 	// Pass to allow other listeners to execute.
 	return ActionResult.PASS
