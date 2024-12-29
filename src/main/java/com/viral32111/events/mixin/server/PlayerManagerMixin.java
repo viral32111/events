@@ -30,7 +30,7 @@ public class PlayerManagerMixin {
 	 * @since 0.1.0
 	 */
 	@Inject(method = "checkCanJoin", at = @At("HEAD"), cancellable = true)
-	private void checkCanJoin(SocketAddress socketAddress, GameProfile gameProfile, CallbackInfoReturnable<Text> callbackInfo) {
+	private void viral32111_events_checkCanJoin(SocketAddress socketAddress, GameProfile gameProfile, CallbackInfoReturnable<Text> callbackInfo) {
 
 		// Invoke all listeners of this mixin's callback
 		ActionResult actionResult = PlayerCanJoinCallback.Companion.getEVENT().invoker().interact(socketAddress, gameProfile);
@@ -51,7 +51,7 @@ public class PlayerManagerMixin {
 	 * @since 0.1.0
 	 */
 	@Inject(method = "onPlayerConnect", at = @At("TAIL"))
-	private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, ConnectedClientData clientData, CallbackInfo ci) {
+	private void viral32111_events_onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, ConnectedClientData clientData, CallbackInfo ci) {
 
 		// Invoke all listeners of this mixin's callback
 		// No need to check the listener results as this mixin cannot be cancelled
@@ -66,7 +66,7 @@ public class PlayerManagerMixin {
 	 * @since 0.1.0
 	 */
 	@Inject(method = "remove", at = @At("TAIL"))
-	private void remove(ServerPlayerEntity player, CallbackInfo callbackInfo) {
+	private void viral32111_events_remove(ServerPlayerEntity player, CallbackInfo callbackInfo) {
 
 		// Invoke all listeners of this mixin's callback
 		// No need to check the listener results as this mixin cannot be cancelled

@@ -17,7 +17,7 @@ public class PlayerEntityMixin {
 	 * @since 0.3.4
 	 */
 	@Inject(method = "addExperience", at = @At("TAIL"))
-	public void addExperience(int experience, CallbackInfo info) {
+	public void viral32111_events_addExperience(int experience, CallbackInfo info) {
 
 		// Ignore this event if the player did not actually gain any experience (why does this happen?)
 		if (experience <= 0) return;

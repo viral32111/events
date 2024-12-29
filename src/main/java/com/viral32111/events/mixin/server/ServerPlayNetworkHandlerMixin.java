@@ -25,7 +25,7 @@ public class ServerPlayNetworkHandlerMixin {
 	 * @since 0.1.0
 	 */
 	@Inject(method = "onChatMessage", at = @At("TAIL"))
-	private void onChatMessage(ChatMessageC2SPacket packet, CallbackInfo callbackInfo) {
+	private void viral32111_events_onChatMessage(ChatMessageC2SPacket packet, CallbackInfo callbackInfo) {
 
 		// Invoke all listeners of this mixin's callback.
 		// No need to check the listener results as this mixin cannot be cancelled.

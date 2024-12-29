@@ -25,7 +25,7 @@ public class EntityMixin {
 	 * @since 0.5.0
 	 */
 	@Unique
-	private TeleportTarget teleportTarget = null;
+	private TeleportTarget viral32111_events_teleportTarget = null;
 
 	/**
 	 * Finds the ServerPlayerEntity from this Entity.
@@ -34,7 +34,7 @@ public class EntityMixin {
 	 */
 	@Unique
 	@Nullable
-	private ServerPlayerEntity asServerPlayer() {
+	private ServerPlayerEntity viral32111_events_asServerPlayer() {
 
 		// Cast the current object (within the injection) to an entity.
 		// NOTE: Must first cast to generic object otherwise it is invalid.
@@ -61,9 +61,9 @@ public class EntityMixin {
 	 * @since 0.5.0
 	 */
 	@Redirect(method = "tickPortalTeleportation", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/dimension/PortalManager;createTeleportTarget(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/Entity;)Lnet/minecraft/world/TeleportTarget;"))
-	private TeleportTarget createTeleportTarget(PortalManager instance, ServerWorld serverWorld, Entity entity) {
-		this.teleportTarget = instance.createTeleportTarget(serverWorld, entity);
-		return this.teleportTarget;
+	private TeleportTarget viral32111_events_createTeleportTarget(PortalManager instance, ServerWorld serverWorld, Entity entity) {
+		this.viral32111_events_teleportTarget = instance.createTeleportTarget(serverWorld, entity);
+		return this.viral32111_events_teleportTarget;
 	}
 
 	/**
@@ -72,19 +72,19 @@ public class EntityMixin {
 	 * @since 0.5.0
 	 */
 	@Inject(method = "tickPortalTeleportation", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/dimension/PortalManager;createTeleportTarget(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/Entity;)Lnet/minecraft/world/TeleportTarget;", shift = At.Shift.AFTER), cancellable = true)
-	private void tickPortalTeleportation(CallbackInfo callbackInfo) {
+	private void viral32111_events_tickPortalTeleportation(CallbackInfo callbackInfo) {
 
 		// Is this a player travelling through a portal?
-		ServerPlayerEntity player = this.asServerPlayer();
-		if (player != null && this.teleportTarget != null) {
+		ServerPlayerEntity player = this.viral32111_events_asServerPlayer();
+		if (player != null && this.viral32111_events_teleportTarget != null) {
 			// Invoke all listeners of this mixin's callback.
-			ActionResult actionResult = PlayerEnterPortalCallback.Companion.getEVENT().invoker().interact(player, this.teleportTarget);
+			ActionResult actionResult = PlayerEnterPortalCallback.Companion.getEVENT().invoker().interact(player, this.viral32111_events_teleportTarget);
 
 			// Prevent the player from travelling dimension if any of the listeners return a failure.
 			if (actionResult == ActionResult.FAIL) callbackInfo.cancel();
 
 			// Clear the teleport target so we're fresh for the next invocation
-			this.teleportTarget = null;
+			this.viral32111_events_teleportTarget = null;
 		}
 
 	}

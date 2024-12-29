@@ -18,7 +18,7 @@ public class ServerPlayerEntityMixin {
 	 * @since 0.1.0
 	 */
 	@Inject(method = "onDeath", at = @At("TAIL"))
-	private void onDeath(DamageSource damageSource, CallbackInfo info) {
+	private void viral32111_events_onDeath(DamageSource damageSource, CallbackInfo info) {
 
 		// Cast the current object (within the injection) to a player.
 		// NOTE: Must first cast to generic object otherwise it is invalid.
