@@ -38,7 +38,7 @@ jobs:
           tools: latest
 
       - name: Build project
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         env:
           GHPKG_USER: ${{ github.repository_owner }}
           GHPKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
