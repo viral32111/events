@@ -10,10 +10,11 @@
 	"mixins": [],
 	"client": [],
 	"server": [
+		"server.EntityMixin",
+		"server.PlayerAdvancementTrackerMixin",
+		"server.PlayerEntityMixin",
 		"server.PlayerManagerMixin",
 		"server.ServerPlayerEntityMixin",
-		"server.ServerPlayNetworkHandlerMixin",
-		"server.PlayerEntityMixin",
-		"server.PlayerAdvancementTrackerMixin"
+		"server.ServerPlayNetworkHandlerMixin"
 	]
 }

@@ -6,6 +6,7 @@ import com.viral32111.events.callback.server.PlayerJoinCallback;
 import com.viral32111.events.callback.server.PlayerLeaveCallback;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.PlayerManager;
+import net.minecraft.server.network.ConnectedClientData;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -22,10 +23,9 @@ public class PlayerManagerMixin {
 
 	/**
 	 * Runs when a player attempts to join the server (before ban & whitelist checks).
-	 *
 	 * @param socketAddress The IP address & port number of the connecting player. Should be cast to InetSocketAddress.
-	 * @param gameProfile   The profile of the connecting player. Includes username, UUID, etc.
-	 * @param callbackInfo  Return text to prevent the player from joining.
+	 * @param gameProfile The profile of the connecting player. Includes username, UUID, etc.
+	 * @param callbackInfo Return text to prevent the player from joining.
 	 * @see com.viral32111.events.callback.server.PlayerCanJoinCallback
 	 * @since 0.1.0
 	 */
@@ -44,24 +44,23 @@ public class PlayerManagerMixin {
 
 	/**
 	 * Runs when a player has joined the server.
-	 *
 	 * @param connection The IP address & port number of the player that joined the server.
-	 * @param player     The player that joined the server.
+	 * @param player The player that joined the server.
+	 * @param clientData Details of the player's client.
 	 * @see com.viral32111.events.callback.server.PlayerJoinCallback
 	 * @since 0.1.0
 	 */
 	@Inject(method = "onPlayerConnect", at = @At("TAIL"))
-	private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo callbackInfo) {
+	private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, ConnectedClientData clientData, CallbackInfo ci) {
 
 		// Invoke all listeners of this mixin's callback
 		// No need to check the listener results as this mixin cannot be cancelled
-		PlayerJoinCallback.Companion.getEVENT().invoker().interact(connection, player);
+		PlayerJoinCallback.Companion.getEVENT().invoker().interact(connection, player, clientData);
 
 	}
 
 	/**
 	 * Runs when a player has left the server.
-	 *
 	 * @param player The player that left the server.
 	 * @see com.viral32111.events.callback.server.PlayerJoinCallback
 	 * @since 0.1.0

@@ -26,7 +26,7 @@ public class PlayerAdvancementTrackerMixin {
 
 	/**
 	 * Runs when a player gains progress towards an advancement.
-	 * @param advancement   The advancement that was progressed.
+	 * @param advancement The advancement that was progressed.
 	 * @param criterionName The name of the criterion that was progressed.
 	 * @see com.viral32111.events.callback.server.PlayerCompleteAdvancementCallback
 	 * @since 0.3.6
@@ -36,13 +36,17 @@ public class PlayerAdvancementTrackerMixin {
 
 		// Do not continue if this advancement is incomplete.
 		AdvancementProgress advancementProgress = this.getProgress(advancement);
+		//Main.Companion.getLOGGER().info("PlayerAdvancementTrackerMixin() -> grantCriterion() -> advancementProgress.isDone(): %b".formatted(advancementProgress.isDone()));
 		if (!advancementProgress.isDone()) return;
 
 		// Determine if this announcement would be publicly announced in chat, taking into account game-rules and the advancement itself.
-		boolean shouldAnnounceToChat = (advancement.value().display().isPresent() && advancement.value().display().get().shouldAnnounceToChat()) && owner.getWorld().getGameRules().getBoolean(GameRules.ANNOUNCE_ADVANCEMENTS);
+		// For example, the 'unlock_right_away' criterion (recipe book unlocked after joining world for the first time) is NOT announced in chat but rather shows on the player's HUD - https://forums.minecraftforge.net/topic/145244-1204-events-when-player-start-a-new-word-or-respawn-after-being-killed-recipes-in-the-recipe-book-add-items-to-villager/
+		boolean shouldAnnounceToChat = (advancement.value().display().isPresent() && advancement.value().display().get().shouldAnnounceToChat()) && owner.getServerWorld().getGameRules().getBoolean(GameRules.ANNOUNCE_ADVANCEMENTS);
+		//Main.Companion.getLOGGER().info("PlayerAdvancementTrackerMixin() -> grantCriterion() -> shouldAnnounceToChat: %b".formatted(shouldAnnounceToChat));
 
 		// Invoke all listeners of this mixin's callback.
 		// No need to check the listener results as this mixin cannot be cancelled.
+		//Main.Companion.getLOGGER().info("PlayerAdvancementTrackerMixin() -> grantCriterion() -> PlayerCompleteAdvancementCallback: %s %s %s %b".formatted(owner.getName(), advancement.value().name().orElse(Text.of("N/A")), criterionName, shouldAnnounceToChat));
 		PlayerCompleteAdvancementCallback.Companion.getEVENT().invoker().interact(owner, advancement.value(), criterionName, shouldAnnounceToChat);
 
 	}

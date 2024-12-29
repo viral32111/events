@@ -3,6 +3,7 @@ package com.viral32111.events.callback.server
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
 import net.minecraft.network.ClientConnection
+import net.minecraft.server.network.ConnectedClientData
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.ActionResult
 
@@ -16,9 +17,9 @@ fun interface PlayerJoinCallback {
 	companion object {
 		val EVENT: Event<PlayerJoinCallback> =
 			EventFactory.createArrayBacked(PlayerJoinCallback::class.java) { listeners ->
-				PlayerJoinCallback { connection, player ->
+				PlayerJoinCallback { connection, player, data ->
 					for (listener in listeners) {
-						val result = listener.interact(connection, player)
+						val result = listener.interact(connection, player, data)
 						if (result != ActionResult.PASS) return@PlayerJoinCallback result
 					}
 
@@ -35,5 +36,5 @@ fun interface PlayerJoinCallback {
 	 * @see PlayerJoinCallback
 	 * @since 0.2.0
 	 */
-	fun interact(connection: ClientConnection, player: ServerPlayerEntity): ActionResult
+	fun interact(connection: ClientConnection, player: ServerPlayerEntity, data: ConnectedClientData): ActionResult
 }

@@ -11,7 +11,7 @@ This is a [Minecraft Fabric](https://fabricmc.net/) mod that adds callbacks usin
 
 This mod does not do much by itself, other than log example messages for each callback. It is designed as a dependency for my other mods.
 
-The mixins in this mod are accurate as of release **1.20.1**. Feel free to submit [pull requests](https://github.com/viral32111/example-mod/pulls) to keep them up-to-date if they break. See the [Gradle properties file](/gradle.properties) for the versions this mod was last built against.
+The mixins in this mod are accurate as of release **1.21.4**. Feel free to submit [pull requests](https://github.com/viral32111/example-mod/pulls) to keep them up-to-date if they break. See the [Gradle properties file](/gradle.properties) for the versions this mod was last built against.
 
 ## 📜 Background
 
@@ -35,7 +35,7 @@ Documentation for each callback is written within the source code as comments.
   * [`PlayerLeaveCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerLeaveCallback.kt) - When a player has left the server.
   * [`PlayerDeathCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerDeathCallback.kt) - When a player has died.
   * [`PlayerChatMessageCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerChatMessageCallback.kt) - When a player has sent a chat message.
-  * [`PlayerEnterPortalCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerEnterPortalCallback.kt) - When a player is about to change dimension.
+  * [`PlayerEnterPortalCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerEnterPortalCallback.kt) - When a player attempts to teleport via a Nether or End portal.
   * [`PlayerGainExperienceCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerGainExperienceCallback.kt) - When a player has gained experience.
   * [`PlayerCompleteAdvancementCallback`](/src/main/kotlin/com/viral32111/events/callback/server/PlayerGainExperienceCallback.kt) - When a player has completed an advancement (including challenges & goals).
 
@@ -44,6 +44,8 @@ Documentation for each callback is written within the source code as comments.
 <a href="https://modrinth.com/mod/fabric-api/"><img src="https://github.com/viral32111/discord-relay/assets/19510403/2e0d32ee-b4aa-4d93-9388-4a45639c4a96" height="48" alt="Requires Fabric API"></a>
 <a href="https://modrinth.com/mod/fabric-language-kotlin"><img src="https://github.com/viral32111/discord-relay/assets/19510403/ab7b8cbb-ff80-4359-8fc9-13a2cf62c4bf" height="48" alt="Requires Fabric Language Kotlin"></a>
 <br>
+
+[Java 21 is required for Minecraft 1.21](https://minecraft.wiki/w/Tutorial:Setting_up_a_server#Java_version).
 
 Firstly, add this repository's Gradle package registry to your Gradle configuration.
 

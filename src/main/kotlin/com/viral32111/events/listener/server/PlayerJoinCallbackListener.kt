@@ -2,6 +2,7 @@ package com.viral32111.events.listener.server
 
 import com.viral32111.events.Main
 import net.minecraft.network.ClientConnection
+import net.minecraft.server.network.ConnectedClientData
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.ActionResult
 import java.net.InetSocketAddress
@@ -11,11 +12,16 @@ import kotlin.math.roundToInt
  * Runs when a player has joined the server.
  * @param connection The IP address & port number of the player that joined the server.
  * @param player The player that joined the server.
+ * @param data Details of the player's client.
  * @return Pass to allow other callback listeners to be executed, fail to prevent their execution.
  * @see com.viral32111.events.callback.server.PlayerCanJoinCallback
  * @since 0.2.0
  */
-fun playerJoinCallbackListener(connection: ClientConnection, player: ServerPlayerEntity): ActionResult {
+fun playerJoinCallbackListener(
+	connection: ClientConnection,
+	player: ServerPlayerEntity,
+	data: ConnectedClientData
+): ActionResult {
 
 	// Cast the connection address to expose address & port properties.
 	val address = connection.address as InetSocketAddress

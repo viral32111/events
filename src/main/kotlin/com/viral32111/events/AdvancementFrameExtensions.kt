@@ -2,6 +2,7 @@ package com.viral32111.events
 
 import net.minecraft.advancement.Advancement
 import net.minecraft.advancement.AdvancementFrame
+import kotlin.jvm.optionals.getOrNull
 
 /**
  * Gets the appropriate chat text for this advancement type (task, challenge, goal).
@@ -42,11 +43,34 @@ fun AdvancementFrame?.getColor(): Int =
 		else -> 0x54FB54 // Advancement Green
 	}
 
-/** @see getText */
-fun Advancement.getText(): String? = display?.get()?.frame?.getText()
+/**
+ * Gets the name of this advancement.
+ * @since 0.5.0
+ */
+fun Advancement.getName(): String? = display?.getOrNull()?.title?.string
 
-/** @see getType */
-fun Advancement.getType(): String? = display?.get()?.frame?.getType()
+/**
+ * Gets the appropriate chat text for this advancement type (task, challenge, goal).
+ * Example: 'has made the advancement', 'completed the challenge'.
+ * @return The appropriate text for this advancement.
+ * @see AdvancementFrame.getText
+ * @since 0.3.6
+ */
+fun Advancement.getText(): String? = display?.getOrNull()?.frame?.getText()
 
-/** @see getColor */
-fun Advancement.getColor(): Int? = display?.get()?.frame?.getColor()
+/**
+ * Gets the friendly type for this advancement.
+ * Example: 'Goal', 'Challenge'.
+ * @return The appropriate text for this advancement.
+ * @see AdvancementFrame.getType
+ * @since 0.3.6
+ */
+fun Advancement.getType(): String? = display?.getOrNull()?.frame?.getType()
+
+/**
+ * Gets the appropriate chat color for this advancement (purple for challenge, green otherwise).
+ * @return The appropriate color for this advancement.
+ * @see AdvancementFrame.getColor
+ * @since 0.3.6
+ */
+fun Advancement.getColor(): Int? = display?.getOrNull()?.frame?.getColor()

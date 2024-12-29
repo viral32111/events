@@ -12,7 +12,6 @@ public class PlayerEntityMixin {
 
 	/**
 	 * Runs when a player has gained experience.
-	 *
 	 * @param experience The amount of experience gained.
 	 * @see com.viral32111.events.callback.server.PlayerGainExperienceCallback
 	 * @since 0.3.4

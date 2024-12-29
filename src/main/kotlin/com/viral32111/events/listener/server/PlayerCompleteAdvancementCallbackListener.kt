@@ -1,6 +1,9 @@
 package com.viral32111.events.listener.server
 
-import com.viral32111.events.*
+import com.viral32111.events.Main
+import com.viral32111.events.getName
+import com.viral32111.events.getText
+import com.viral32111.events.getType
 import net.minecraft.advancement.Advancement
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.ActionResult
@@ -27,13 +30,14 @@ fun playerCompleteAdvancementCallbackListener(
 	val playerUUID = player.uuidAsString
 
 	// The advancement's information.
-	// Take a look at the extension methods in AdvancementFrameExtensions.kt!
-	val advancementName = advancement.display?.get()?.title?.string
+	// NOTE: Take a look at the extension methods in AdvancementFrameExtensions.kt!
+	val advancementName = advancement.getName()
 	val advancementText = advancement.getText()
 	val advancementType = advancement.getType()
 
 	// Display a console message with details of this event.
-	Main.LOGGER.info("Player '$playerName' ($playerUUID) $advancementText '$advancementName' (Criterion: '$criterionName', Type: '$advancementType', Announce: '$shouldAnnounceToChat').")
+	if ((advancementName != null && advancementText != null && advancementType != null) && shouldAnnounceToChat)
+		Main.LOGGER.info("Player '$playerName' ($playerUUID) $advancementText '$advancementName' (criterion: '$criterionName', type: '$advancementType', announce: '$shouldAnnounceToChat').")
 
 	// Pass to allow other listeners to execute.
 	return ActionResult.PASS
