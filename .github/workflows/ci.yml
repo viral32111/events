@@ -56,13 +56,13 @@ jobs:
       #    cache-disabled: true
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: build/libs/*.jar
 
       #- name: Upload test results
-      #  uses: actions/upload-artifact@v4
+      #  uses: actions/upload-artifact@v5
       #  with:
       #    name: test-results
       #    path: |
