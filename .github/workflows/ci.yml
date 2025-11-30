@@ -4,11 +4,9 @@ on:
   push:
     paths:
       - 'gradle/**/*'
-      - 'gradlew'
-      - 'gradlew.bat'
+      - 'gradle*'
       - 'src/**/*'
-      - 'build.gradle.kts'
-      - 'settings.gradle.kts'
+      - '*.gradle.kts'
       - 'gradle.properties'
       - '.github/workflows/*.yml'
     branches:
@@ -36,9 +34,6 @@ jobs:
         with:
           java-version: 21
           distribution: temurin
-
-      - name: Set Gradle permissions
-        run: chmod +x gradlew
 
       - name: Build project
         uses: gradle/gradle-build-action@v3
