@@ -11,7 +11,7 @@ This is a [Minecraft Fabric](https://fabricmc.net/) mod that adds callbacks usin
 
 This mod does not do much by itself, other than log example messages for each callback. It is designed as a dependency for my other mods.
 
-The mixins in this mod are accurate as of release **1.21.4**. Feel free to submit [pull requests](https://github.com/viral32111/example-mod/pulls) to keep them up-to-date if they break. See the [Gradle properties file](/gradle.properties) for the versions this mod was last built against.
+The mixins in this mod are accurate as of release **26.1.2**. Feel free to submit [pull requests](https://github.com/viral32111/example-mod/pulls) to keep them up-to-date if they break. See the [Gradle properties file](/gradle.properties) for the versions this mod was last built against.
 
 ## 📜 Background
 
@@ -45,7 +45,7 @@ Documentation for each callback is written within the source code as comments.
 <a href="https://modrinth.com/mod/fabric-language-kotlin"><img src="https://github.com/viral32111/discord-relay/assets/19510403/ab7b8cbb-ff80-4359-8fc9-13a2cf62c4bf" height="48" alt="Requires Fabric Language Kotlin"></a>
 <br>
 
-[Java 21 is required for Minecraft 1.21](https://minecraft.wiki/w/Tutorial:Setting_up_a_server#Java_version).
+[Java 25 is required for Minecraft 26.1.2](https://minecraft.wiki/w/Tutorial:Setting_up_a_server#Java_version).
 
 Firstly, add this repository's Gradle package registry to your Gradle configuration.
 
@@ -82,14 +82,14 @@ Gradle Groovy:
 
 ```groovy
 dependencies {
-  implementation "com.viral32111.events:0.3.5"
+  implementation "com.viral32111.events:0.5.0"
 }
 ```
 
 Kotlin DSL:
 ```kotlin
 dependencies {
-  implementation( "com.viral32111.events", "events", "0.3.5" )
+  implementation( "com.viral32111.events:events:0.5.0" )
 }
 ```
 
