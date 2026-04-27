@@ -1,9 +1,9 @@
 package com.viral32111.events.listener.server
 
 import com.viral32111.events.Main
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.ActionResult
-import net.minecraft.world.TeleportTarget
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.portal.TeleportTransition
 import kotlin.math.roundToInt
 
 /**
@@ -14,22 +14,20 @@ import kotlin.math.roundToInt
  * @see com.viral32111.events.callback.server.PlayerEnterPortalCallback
  * @since 0.3.4
  */
-fun playerEnterPortalCallbackListener(player: ServerPlayerEntity, teleportTarget: TeleportTarget): ActionResult {
+fun playerEnterPortalCallbackListener(player: Player, teleportTarget: TeleportTransition): InteractionResult {
 
 	// The player's username & unique identifier.
 	val playerName = player.name.string
-	val playerUUID = player.uuidAsString
+	val playerUUID = player.stringUUID
 
 	// The player's position at the time of travelling.
-	val playerPosX = player.pos.getX().roundToInt()
-	val playerPosY = player.pos.getY().roundToInt()
-	val playerPosZ = player.pos.getZ().roundToInt()
+	val playerPosX = player.x.roundToInt()
+	val playerPosY = player.y.roundToInt()
+	val playerPosZ = player.z.roundToInt()
 
 	// The player's current dimension & dimension they are travelling to.
-	val currentDimension = player.serverWorld.registryKey
-	val currentDimensionName = "${currentDimension.value.namespace}:${currentDimension.value.path}"
-	val destinationDimension = teleportTarget.world.registryKey
-	val destinationDimensionName = "${destinationDimension.value.namespace}:${destinationDimension.value.path}"
+	val currentDimensionName = player.level().dimension().registryKey().toString()
+	val destinationDimensionName = teleportTarget.newLevel.dimension().registryKey().toString()
 
 	// The player's position in the dimension they are travelling to.
 	val destinationPosX = teleportTarget.position.x.roundToInt()
@@ -41,7 +39,7 @@ fun playerEnterPortalCallbackListener(player: ServerPlayerEntity, teleportTarget
 	Main.LOGGER.info("Player '$playerName' ($playerUUID) is travelling from dimension '$currentDimensionName' (at [$playerPosX, $playerPosY, $playerPosZ]) to dimension '$destinationDimensionName' (at [$destinationPosX, $destinationPosY, $destinationPosZ]).")
 
 	// Pass to allow other listeners to execute.
-	// ActionResult.FAIL will prevent the player from joining (and other listeners from executing).
-	return ActionResult.PASS
+	// InteractionResult.FAIL will prevent the player from joining (and other listeners from executing).
+	return InteractionResult.PASS
 
 }

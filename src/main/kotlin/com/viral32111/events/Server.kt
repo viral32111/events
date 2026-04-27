@@ -1,7 +1,21 @@
 package com.viral32111.events
 
-import com.viral32111.events.callback.server.*
-import com.viral32111.events.listener.server.*
+import com.viral32111.events.callback.server.PlayerCanJoinCallback
+import com.viral32111.events.callback.server.PlayerChatMessageCallback
+import com.viral32111.events.callback.server.PlayerCompleteAdvancementCallback
+import com.viral32111.events.callback.server.PlayerDeathCallback
+import com.viral32111.events.callback.server.PlayerEnterPortalCallback
+import com.viral32111.events.callback.server.PlayerGainExperienceCallback
+import com.viral32111.events.callback.server.PlayerJoinCallback
+import com.viral32111.events.callback.server.PlayerLeaveCallback
+import com.viral32111.events.listener.server.playerCanJoinCallbackListener
+import com.viral32111.events.listener.server.playerChatMessageCallbackListener
+import com.viral32111.events.listener.server.playerCompleteAdvancementCallbackListener
+import com.viral32111.events.listener.server.playerDeathCallbackListener
+import com.viral32111.events.listener.server.playerEnterPortalCallbackListener
+import com.viral32111.events.listener.server.playerGainExperienceCallbackListener
+import com.viral32111.events.listener.server.playerJoinCallbackListener
+import com.viral32111.events.listener.server.playerLeaveCallbackListener
 import net.fabricmc.api.DedicatedServerModInitializer
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import java.time.ZonedDateTime
@@ -59,22 +73,22 @@ class Server : DedicatedServerModInitializer {
 		// https://maven.fabricmc.net/docs/fabric-api-0.81.3+1.20/net/fabricmc/fabric/api/event/lifecycle/v1/ServerLifecycleEvents.ServerStarting.html
 		// NOTE: Server IP address & port number are null when this is called.
 		ServerLifecycleEvents.SERVER_STARTING.register { server ->
-			Main.LOGGER.info("Server '${server.serverIp}:${server.serverPort}' (${server.serverModName}) starting at ${getDateTime()}...")
+			Main.LOGGER.info("Server '${server.localIp}:${server.port}' (${server.serverModName}) starting at ${getDateTime()}...")
 		}
 
 		// https://maven.fabricmc.net/docs/fabric-api-0.81.3+1.20/net/fabricmc/fabric/api/event/lifecycle/v1/ServerLifecycleEvents.ServerStarted.html
 		ServerLifecycleEvents.SERVER_STARTED.register { server ->
-			Main.LOGGER.info("Server '${server.serverIp}:${server.serverPort}' (${server.serverModName}) started at ${getDateTime()}.")
+			Main.LOGGER.info("Server '${server.localIp}:${server.port}' (${server.serverModName}) started at ${getDateTime()}.")
 		}
 
 		// https://maven.fabricmc.net/docs/fabric-api-0.81.3+1.20/net/fabricmc/fabric/api/event/lifecycle/v1/ServerLifecycleEvents.ServerStopping.html
 		ServerLifecycleEvents.SERVER_STOPPING.register { server ->
-			Main.LOGGER.info("Server '${server.serverIp}:${server.serverPort}' (${server.serverModName}) stopping at ${getDateTime()}...")
+			Main.LOGGER.info("Server '${server.localIp}:${server.port}' (${server.serverModName}) stopping at ${getDateTime()}...")
 		}
 
 		// https://maven.fabricmc.net/docs/fabric-api-0.81.3+1.20/net/fabricmc/fabric/api/event/lifecycle/v1/ServerLifecycleEvents.ServerStopped.html
 		ServerLifecycleEvents.SERVER_STOPPED.register { server ->
-			Main.LOGGER.info("Server '${server.serverIp}:${server.serverPort}' (${server.serverModName}) stopped at ${getDateTime()}.")
+			Main.LOGGER.info("Server '${server.localIp}:${server.port}' (${server.serverModName}) stopped at ${getDateTime()}.")
 		}
 
 	}

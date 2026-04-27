@@ -2,9 +2,9 @@ package com.viral32111.events.callback.server
 
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.ActionResult
-import net.minecraft.world.TeleportTarget
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.portal.TeleportTransition
 
 /**
  * Callback for before a player is teleported via a Nether or End portal.
@@ -19,10 +19,10 @@ fun interface PlayerEnterPortalCallback {
 				PlayerEnterPortalCallback { player, teleportTarget ->
 					for (listener in listeners) {
 						val result = listener.interact(player, teleportTarget)
-						if (result != ActionResult.PASS) return@PlayerEnterPortalCallback result
+						if (result != InteractionResult.PASS) return@PlayerEnterPortalCallback result
 					}
 
-					return@PlayerEnterPortalCallback ActionResult.PASS
+					return@PlayerEnterPortalCallback InteractionResult.PASS
 				}
 			}
 	}
@@ -34,5 +34,5 @@ fun interface PlayerEnterPortalCallback {
 	 * @return Pass to allow the player to be teleported, fail to prevent the player from being teleported.
 	 * @since 0.3.4
 	 */
-	fun interact(player: ServerPlayerEntity, teleportTarget: TeleportTarget): ActionResult
+	fun interact(player: Player, teleportTarget: TeleportTransition): InteractionResult
 }

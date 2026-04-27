@@ -1,8 +1,8 @@
 package com.viral32111.events.listener.server
 
 import com.viral32111.events.Main
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.ActionResult
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
 import kotlin.math.roundToInt
 
 /**
@@ -12,22 +12,22 @@ import kotlin.math.roundToInt
  * @see com.viral32111.events.callback.server.PlayerCanJoinCallback
  * @since 0.2.0
  */
-fun playerLeaveCallbackListener(player: ServerPlayerEntity): ActionResult {
+fun playerLeaveCallbackListener(player: Player): InteractionResult {
 
 	// The player's username and unique identifier.
 	val playerName = player.name.string
-	val playerUUID = player.uuidAsString
+	val playerUUID = player.stringUUID
 
 	// The player's position (where they logged out).
-	val playerPosX = player.pos.getX().roundToInt()
-	val playerPosY = player.pos.getY().roundToInt()
-	val playerPosZ = player.pos.getZ().roundToInt()
+	val playerPosX = player.x.roundToInt()
+	val playerPosY = player.y.roundToInt()
+	val playerPosZ = player.z.roundToInt()
 
 	// Display a console message with details of this event.
 	// Example: Player 'viral32111' (a51dccb5-7ffa-426b-833b-1a9ce3a31446) left (at 74, 63, -136).
 	Main.LOGGER.info("Player '$playerName' ($playerUUID) left at [$playerPosX, $playerPosY, $playerPosZ].")
 
 	// Pass to allow other listeners to execute.
-	return ActionResult.PASS
+	return InteractionResult.PASS
 
 }

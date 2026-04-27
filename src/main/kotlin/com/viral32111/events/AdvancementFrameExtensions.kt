@@ -1,7 +1,7 @@
 package com.viral32111.events
 
-import net.minecraft.advancement.Advancement
-import net.minecraft.advancement.AdvancementFrame
+import net.minecraft.advancements.Advancement
+import net.minecraft.advancements.AdvancementType
 import kotlin.jvm.optionals.getOrNull
 
 /**
@@ -10,11 +10,11 @@ import kotlin.jvm.optionals.getOrNull
  * @return The appropriate text for this advancement.
  * @since 0.3.6
  */
-fun AdvancementFrame?.getText(): String? =
+fun AdvancementType?.getText(): String? =
 	when (this) {
-		AdvancementFrame.TASK -> "has made the advancement"
-		AdvancementFrame.CHALLENGE -> "completed the challenge"
-		AdvancementFrame.GOAL -> "reached the goal"
+		AdvancementType.TASK -> "has made the advancement"
+		AdvancementType.CHALLENGE -> "completed the challenge"
+		AdvancementType.GOAL -> "reached the goal"
 		else -> null
 	}
 
@@ -24,11 +24,11 @@ fun AdvancementFrame?.getText(): String? =
  * @return The appropriate text for this advancement.
  * @since 0.3.6
  */
-fun AdvancementFrame?.getType(): String? =
+fun AdvancementType?.getType(): String? =
 	when (this) {
-		AdvancementFrame.TASK -> "Advancement"
-		AdvancementFrame.CHALLENGE -> "Challenge"
-		AdvancementFrame.GOAL -> "Goal"
+		AdvancementType.TASK -> "Advancement"
+		AdvancementType.CHALLENGE -> "Challenge"
+		AdvancementType.GOAL -> "Goal"
 		else -> null
 	}
 
@@ -37,9 +37,9 @@ fun AdvancementFrame?.getType(): String? =
  * @return The appropriate color for this advancement.
  * @since 0.3.6
  */
-fun AdvancementFrame?.getColor(): Int =
+fun AdvancementType?.getColor(): Int =
 	when (this) {
-		AdvancementFrame.CHALLENGE -> 0xA700A7 // Challenge Purple
+		AdvancementType.CHALLENGE -> 0xA700A7 // Challenge Purple
 		else -> 0x54FB54 // Advancement Green
 	}
 
@@ -47,30 +47,30 @@ fun AdvancementFrame?.getColor(): Int =
  * Gets the name of this advancement.
  * @since 0.5.0
  */
-fun Advancement.getName(): String? = display?.getOrNull()?.title?.string
+fun Advancement.getName(): String? = display.getOrNull()?.title?.string
 
 /**
  * Gets the appropriate chat text for this advancement type (task, challenge, goal).
  * Example: 'has made the advancement', 'completed the challenge'.
  * @return The appropriate text for this advancement.
- * @see AdvancementFrame.getText
+ * @see AdvancementType.getText
  * @since 0.3.6
  */
-fun Advancement.getText(): String? = display?.getOrNull()?.frame?.getText()
+fun Advancement.getText(): String? = display.getOrNull()?.type?.getText()
 
 /**
  * Gets the friendly type for this advancement.
  * Example: 'Goal', 'Challenge'.
  * @return The appropriate text for this advancement.
- * @see AdvancementFrame.getType
+ * @see AdvancementType.getType
  * @since 0.3.6
  */
-fun Advancement.getType(): String? = display?.getOrNull()?.frame?.getType()
+fun Advancement.getType(): String? = display.getOrNull()?.type?.getType()
 
 /**
  * Gets the appropriate chat color for this advancement (purple for challenge, green otherwise).
  * @return The appropriate color for this advancement.
- * @see AdvancementFrame.getColor
+ * @see AdvancementType.getColor
  * @since 0.3.6
  */
-fun Advancement.getColor(): Int? = display?.getOrNull()?.frame?.getColor()
+fun Advancement.getColor(): Int? = display.getOrNull()?.type?.getColor()

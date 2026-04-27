@@ -2,9 +2,9 @@ package com.viral32111.events.callback.server
 
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
-import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.ActionResult
+import net.minecraft.network.protocol.game.ServerboundChatPacket
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
 
 /**
  * Callback for after a player sends a chat message.
@@ -19,10 +19,10 @@ fun interface PlayerChatMessageCallback {
 				PlayerChatMessageCallback { player, packet ->
 					for (listener in listeners) {
 						val result = listener.interact(player, packet)
-						if (result != ActionResult.PASS) return@PlayerChatMessageCallback result
+						if (result != InteractionResult.PASS) return@PlayerChatMessageCallback result
 					}
 
-					return@PlayerChatMessageCallback ActionResult.PASS
+					return@PlayerChatMessageCallback InteractionResult.PASS
 				}
 			}
 	}
@@ -35,5 +35,5 @@ fun interface PlayerChatMessageCallback {
 	 * @see PlayerChatMessageCallback
 	 * @since 0.2.0
 	 */
-	fun interact(player: ServerPlayerEntity, packet: ChatMessageC2SPacket): ActionResult
+	fun interact(player: Player, packet: ServerboundChatPacket): InteractionResult
 }

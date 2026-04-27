@@ -2,7 +2,7 @@ package com.viral32111.events.listener.server
 
 import com.mojang.authlib.GameProfile
 import com.viral32111.events.Main
-import net.minecraft.util.ActionResult
+import net.minecraft.world.InteractionResult
 import java.net.InetSocketAddress
 import java.net.SocketAddress
 
@@ -14,7 +14,7 @@ import java.net.SocketAddress
  * @see com.viral32111.events.callback.server.PlayerCanJoinCallback
  * @since 0.2.0
  */
-fun playerCanJoinCallbackListener(socketAddress: SocketAddress, gameProfile: GameProfile): ActionResult {
+fun playerCanJoinCallbackListener(socketAddress: SocketAddress, gameProfile: GameProfile): InteractionResult {
 
 	// Cast the socket address to expose address and port properties.
 	val address = socketAddress as InetSocketAddress
@@ -32,7 +32,7 @@ fun playerCanJoinCallbackListener(socketAddress: SocketAddress, gameProfile: Gam
 	Main.LOGGER.info("Player '$playerName' ($playerUUID) is attempting to join from '$sourceIP:$sourcePort'.")
 
 	// Pass to allow other listeners to execute.
-	// ActionResult.FAIL will prevent the player from joining (and other listeners from executing).
-	return ActionResult.PASS
+	// InteractionResult.FAIL will prevent the player from joining (and other listeners from executing).
+	return InteractionResult.PASS
 
 }

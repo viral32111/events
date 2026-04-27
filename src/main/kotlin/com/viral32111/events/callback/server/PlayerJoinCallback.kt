@@ -2,10 +2,10 @@ package com.viral32111.events.callback.server
 
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
-import net.minecraft.network.ClientConnection
-import net.minecraft.server.network.ConnectedClientData
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.ActionResult
+import net.minecraft.network.Connection
+import net.minecraft.server.network.CommonListenerCookie
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
 
 /**
  * Callback for after a player joins the server.
@@ -20,10 +20,10 @@ fun interface PlayerJoinCallback {
 				PlayerJoinCallback { connection, player, data ->
 					for (listener in listeners) {
 						val result = listener.interact(connection, player, data)
-						if (result != ActionResult.PASS) return@PlayerJoinCallback result
+						if (result != InteractionResult.PASS) return@PlayerJoinCallback result
 					}
 
-					return@PlayerJoinCallback ActionResult.PASS
+					return@PlayerJoinCallback InteractionResult.PASS
 				}
 			}
 	}
@@ -36,5 +36,5 @@ fun interface PlayerJoinCallback {
 	 * @see PlayerJoinCallback
 	 * @since 0.2.0
 	 */
-	fun interact(connection: ClientConnection, player: ServerPlayerEntity, data: ConnectedClientData): ActionResult
+	fun interact(connection: Connection, player: Player, data: CommonListenerCookie): InteractionResult
 }

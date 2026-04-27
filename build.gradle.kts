@@ -1,16 +1,17 @@
+import org.gradle.internal.extensions.core.extra
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("fabric-loom")
-	kotlin("jvm") version (System.getProperty("kotlin_version"))
+	kotlin("jvm")
+
+	id("net.fabricmc.fabric-loom")
 
 	id("maven-publish")
 	id("signing")
 }
 
 base {
-	archivesName.set(project.extra["archives_base_name"] as String)
+	archivesName = project.extra["archives_base_name"] as String
 }
 
 version = project.extra["mod_version"] as String
@@ -21,23 +22,16 @@ repositories {}
 dependencies {
 
 	// Minecraft
-	minecraft("com.mojang", "minecraft", project.extra["minecraft_version"] as String)
-
-	// Minecraft source mappings - https://github.com/FabricMC/yarn
-	mappings("net.fabricmc", "yarn", project.extra["yarn_mappings"] as String, null, "v2")
+	minecraft("com.mojang:minecraft:${project.extra["minecraft_version"] as String}")
 
 	// Fabric Loader - https://github.com/FabricMC/fabric-loader
-	modImplementation("net.fabricmc", "fabric-loader", project.extra["loader_version"] as String)
+	implementation("net.fabricmc:fabric-loader:${project.extra["loader_version"] as String}")
 
 	// Fabric API - https://github.com/FabricMC/fabric
-	modImplementation("net.fabricmc.fabric-api", "fabric-api", project.extra["fabric_version"] as String)
+	implementation("net.fabricmc.fabric-api:fabric-api:${project.extra["fabric_api_version"] as String}")
 
 	// Kotlin support for Fabric - https://github.com/FabricMC/fabric-language-kotlin
-	modImplementation(
-		"net.fabricmc",
-		"fabric-language-kotlin",
-		project.extra["fabric_language_kotlin_version"] as String
-	)
+	implementation("net.fabricmc:fabric-language-kotlin:${project.extra["fabric_language_kotlin_version"] as String}")
 
 	// Unit testing
 	testImplementation("org.junit.jupiter:junit-jupiter:5.9.3")
@@ -45,23 +39,36 @@ dependencies {
 
 }
 
-tasks {
-	val javaVersion = JavaVersion.toVersion((project.extra["java_version"] as String).toInt())
+val javaVersion = JavaVersion.toVersion((project.extra["java_version"] as String).toInt())
 
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(javaVersion.toString())
+	}
+
+	sourceCompatibility = javaVersion
+	targetCompatibility = javaVersion
+
+	withSourcesJar()
+}
+
+kotlin {
+	compilerOptions {
+		jvmTarget = JvmTarget.fromTarget(javaVersion.toString())
+	}
+}
+
+tasks {
 	withType<JavaCompile> {
 		options.encoding = "UTF-8"
 		sourceCompatibility = javaVersion.toString()
 		targetCompatibility = javaVersion.toString()
-		options.release.set(javaVersion.toString().toInt())
-	}
-
-	withType<KotlinCompile> {
-		compilerOptions {
-			jvmTarget.set(JvmTarget.fromTarget(javaVersion.toString()))
-		}
+		options.release = javaVersion.toString().toInt()
 	}
 
 	jar {
+		inputs.property("projectName", project.name)
+
 		from("LICENSE.txt") {
 			rename { "${it}_${base.archivesName.get()}.txt" }
 		}
@@ -73,12 +80,12 @@ tasks {
 		filesMatching("fabric.mod.json") {
 			expand(
 				mutableMapOf(
-					"version" to project.extra["mod_version"] as String,
-					"java" to project.extra["java_version"] as String,
-					"minecraft" to project.extra["minecraft_version"] as String,
-					"fabricloader" to project.extra["loader_version"] as String,
-					"fabric_api" to project.extra["fabric_version"] as String,
-					"fabric_language_kotlin" to project.extra["fabric_language_kotlin_version"] as String
+					"mod_version" to project.extra["mod_version"] as String,
+					"java_version" to project.extra["java_version"] as String,
+					"minecraft_version" to project.extra["minecraft_version"] as String,
+					"loader_version" to project.extra["loader_version"] as String,
+					"fabric_api_version" to project.extra["fabric_api_version"] as String,
+					"fabric_language_kotlin_version" to project.extra["fabric_language_kotlin_version"] as String
 				)
 			)
 		}
@@ -87,22 +94,11 @@ tasks {
 		filesMatching("*.mixins.json") {
 			expand(
 				mutableMapOf(
-					"java" to project.extra["java_version"] as String
+					"java_version" to project.extra["java_version"] as String
 				)
 			)
 		}
 
-	}
-
-	java {
-		toolchain {
-			languageVersion.set(JavaLanguageVersion.of(javaVersion.toString()))
-		}
-
-		sourceCompatibility = javaVersion
-		targetCompatibility = javaVersion
-
-		withSourcesJar()
 	}
 
 	test {
@@ -116,7 +112,7 @@ tasks {
 	}
 	*/
 
-	// Empty javadoc JAR
+	// Empty Javadoc JAR
 	register<Jar>("javadocJar") {
 		archiveClassifier.set("javadoc")
 
@@ -192,7 +188,7 @@ publishing {
 			// Include main & sources JAR
 			from(components["java"])
 
-			// Include empty JavaDoc JAR
+			// Include empty Javadoc JAR
 			artifact(tasks["javadocJar"]) {
 				classifier = "javadoc"
 			}

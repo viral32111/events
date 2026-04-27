@@ -1,25 +1,25 @@
 package com.viral32111.events.mixin.server;
 
 import com.viral32111.events.callback.server.PlayerCompleteAdvancementCallback;
-import net.minecraft.advancement.AdvancementEntry;
-import net.minecraft.advancement.AdvancementProgress;
-import net.minecraft.advancement.PlayerAdvancementTracker;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.world.GameRules;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.server.PlayerAdvancements;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.gamerules.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(PlayerAdvancementTracker.class)
-public class PlayerAdvancementTrackerMixin {
+@Mixin(PlayerAdvancements.class)
+public class PlayerAdvancementsMixin {
 
 	@Shadow
-	private ServerPlayerEntity owner;
+	private Player owner;
 
 	@Shadow
-	public AdvancementProgress getProgress(AdvancementEntry advancement) {
+	public AdvancementProgress getProgress(AdvancementHolder advancement) {
 		return null;
 	}
 
@@ -31,7 +31,7 @@ public class PlayerAdvancementTrackerMixin {
 	 * @since 0.3.6
 	 */
 	@Inject(method = "grantCriterion", at = @At("RETURN"))
-	private void viral32111_events_grantCriterion(AdvancementEntry advancement, String criterionName, CallbackInfoReturnable<Boolean> info) {
+	private void viral32111_events_grantCriterion(AdvancementHolder advancement, String criterionName, CallbackInfoReturnable<Boolean> info) {
 
 		// Do not continue if this advancement is incomplete.
 		AdvancementProgress advancementProgress = this.getProgress(advancement);
@@ -39,7 +39,7 @@ public class PlayerAdvancementTrackerMixin {
 
 		// Determine if this announcement would be publicly announced in chat, taking into account game-rules and the advancement itself.
 		// For example, the 'unlock_right_away' criterion (recipe book unlocked after joining world for the first time) is NOT announced in chat but rather shows on the player's HUD - https://forums.minecraftforge.net/topic/145244-1204-events-when-player-start-a-new-word-or-respawn-after-being-killed-recipes-in-the-recipe-book-add-items-to-villager/
-		boolean shouldAnnounceToChat = (advancement.value().display().isPresent() && advancement.value().display().get().shouldAnnounceToChat()) && owner.getServerWorld().getGameRules().getBoolean(GameRules.ANNOUNCE_ADVANCEMENTS);
+		boolean shouldAnnounceToChat = (advancement.value().display().isPresent() && advancement.value().display().get().shouldAnnounceChat()) && owner.level().getServer().getGameRules().get(GameRules.SHOW_ADVANCEMENT_MESSAGES);
 
 		// Invoke all listeners of this mixin's callback.
 		// No need to check the listener results as this mixin cannot be cancelled.

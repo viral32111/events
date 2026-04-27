@@ -2,9 +2,9 @@ package com.viral32111.events.callback.server
 
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
-import net.minecraft.advancement.Advancement
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.ActionResult
+import net.minecraft.advancements.Advancement
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
 
 /**
  * Callback for after a player completes an advancement (including challenges and goals).
@@ -19,10 +19,10 @@ fun interface PlayerCompleteAdvancementCallback {
 				PlayerCompleteAdvancementCallback { player, advancement, criterionName, shouldAnnounceToChat ->
 					for (listener in listeners) {
 						val result = listener.interact(player, advancement, criterionName, shouldAnnounceToChat)
-						if (result != ActionResult.PASS) return@PlayerCompleteAdvancementCallback result
+						if (result != InteractionResult.PASS) return@PlayerCompleteAdvancementCallback result
 					}
 
-					return@PlayerCompleteAdvancementCallback ActionResult.PASS
+					return@PlayerCompleteAdvancementCallback InteractionResult.PASS
 				}
 			}
 	}
@@ -38,9 +38,9 @@ fun interface PlayerCompleteAdvancementCallback {
 	 * @since 0.3.6
 	 */
 	fun interact(
-		player: ServerPlayerEntity,
+		player: Player,
 		advancement: Advancement,
 		criterionName: String,
 		shouldAnnounceToChat: Boolean
-	): ActionResult
+	): InteractionResult
 }

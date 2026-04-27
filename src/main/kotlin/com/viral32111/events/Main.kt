@@ -6,10 +6,10 @@ import net.fabricmc.fabric.api.event.player.AttackEntityCallback
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.fabricmc.fabric.api.event.player.UseEntityCallback
 import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.util.ActionResult
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.world.InteractionResult
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.lang.IllegalStateException
 import kotlin.math.roundToInt
 
 @Suppress("UNUSED")
@@ -49,27 +49,29 @@ class Main : ModInitializer {
 		// https://maven.fabricmc.net/docs/fabric-api-0.81.3+1.20/net/fabricmc/fabric/api/event/player/AttackBlockCallback.html, https://fabricmc.net/wiki/tutorial:callbacks
 		AttackBlockCallback.EVENT.register { player, world, _, position, _ ->
 			val blockState = world.getBlockState(position)
-			LOGGER.info("Player '${player.name.string}' (${player.uuidAsString}) attacked block '${blockState.block.name.string}' (${blockState.registryEntry.key.get().value}) [${position.x}, ${position.y}, ${position.z}] in world '${world.server?.saveProperties?.levelName}' (${world.registryKey.value}).")
-			return@register ActionResult.PASS
+			val id = BuiltInRegistries.BLOCK.getKey(blockState.block)
+			LOGGER.info("Player '${player.name.string}' (${player.stringUUID}) attacked block '${blockState.block.name.string}' (${id}) [${position.x}, ${position.y}, ${position.z}] in world '${world.server?.worldData?.levelName}' (${world.dimension()}).")
+			return@register InteractionResult.PASS
 		}
 
 		// https://maven.fabricmc.net/docs/fabric-api-0.81.3+1.20/net/fabricmc/fabric/api/event/player/UseBlockCallback.html
 		UseBlockCallback.EVENT.register { player, world, _, result ->
 			val blockState = world.getBlockState(result.blockPos)
-			LOGGER.info("Player '${player.name.string}' (${player.uuidAsString}) used block '${blockState.block.name.string}' (${blockState.registryEntry.key.get().value}) [${result.blockPos.x}, ${result.blockPos.y}, ${result.blockPos.z}] in world '${world.server?.saveProperties?.levelName}' (${world.registryKey.value}).")
-			return@register ActionResult.PASS
+			val id = BuiltInRegistries.BLOCK.getKey(blockState.block)
+			LOGGER.info("Player '${player.name.string}' (${player.stringUUID}) used block '${blockState.block.name.string}' (${id}) [${result.blockPos.x}, ${result.blockPos.y}, ${result.blockPos.z}] in world '${world.server?.worldData?.levelName}' (${world.dimension()}).")
+			return@register InteractionResult.PASS
 		}
 
 		// https://maven.fabricmc.net/docs/fabric-api-0.81.3+1.20/net/fabricmc/fabric/api/event/player/AttackEntityCallback.html
 		AttackEntityCallback.EVENT.register { player, world, _, entity, _ ->
-			LOGGER.info("Player '${player.name.string}' (${player.uuidAsString}) attacked entity '${entity.name.string}' (${entity.type}) at [${entity.pos.x.roundToInt()}, ${entity.pos.y.roundToInt()}, ${entity.pos.z.roundToInt()}] in world '${world.server?.saveProperties?.levelName}' (${world.registryKey.value}).")
-			return@register ActionResult.PASS
+			LOGGER.info("Player '${player.name.string}' (${player.stringUUID}) attacked entity '${entity.name.string}' (${entity.type}) at [${entity.x.roundToInt()}, ${entity.y.roundToInt()}, ${entity.z.roundToInt()}] in world '${world.server?.worldData?.levelName}' (${world.dimension()}).")
+			return@register InteractionResult.PASS
 		}
 
 		// https://maven.fabricmc.net/docs/fabric-api-0.81.3+1.20/net/fabricmc/fabric/api/event/player/UseEntityCallback.html
 		UseEntityCallback.EVENT.register { player, world, _, entity, _ ->
-			LOGGER.info("Player '${player.name.string}' (${player.uuidAsString}) used entity '${entity.name.string}' (${entity.type}) at [${entity.pos.x.roundToInt()}, ${entity.pos.y.roundToInt()}, ${entity.pos.z.roundToInt()}] in world '${world.server?.saveProperties?.levelName}' (${world.registryKey.value}).")
-			return@register ActionResult.PASS
+			LOGGER.info("Player '${player.name.string}' (${player.stringUUID}) used entity '${entity.name.string}' (${entity.type}) at [${entity.x.roundToInt()}, ${entity.y.roundToInt()}, ${entity.z.roundToInt()}] in world '${world.server?.worldData?.levelName}' (${world.dimension()}).")
+			return@register InteractionResult.PASS
 		}
 
 	}

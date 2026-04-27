@@ -2,7 +2,7 @@
 	"required": true,
 	"minVersion": "0.8",
 	"package": "com.viral32111.events.mixin",
-	"compatibilityLevel": "JAVA_${ java }",
+	"compatibilityLevel": "JAVA_${java_version}",
 	"verbose": true,
 	"injectors": {
 		"defaultRequire": 1
@@ -11,10 +11,10 @@
 	"client": [],
 	"server": [
 		"server.EntityMixin",
-		"server.PlayerAdvancementTrackerMixin",
-		"server.PlayerEntityMixin",
-		"server.PlayerManagerMixin",
-		"server.ServerPlayerEntityMixin",
-		"server.ServerPlayNetworkHandlerMixin"
+		"server.PlayerAdvancementsMixin",
+		"server.PlayerListMixin",
+		"server.PlayerMixin",
+		"server.ServerGamePacketListenerImplMixin",
+		"server.ServerPlayerMixin"
 	]
 }

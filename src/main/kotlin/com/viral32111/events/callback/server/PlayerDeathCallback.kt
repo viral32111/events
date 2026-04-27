@@ -2,13 +2,13 @@ package com.viral32111.events.callback.server
 
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.ActionResult
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.player.Player
 
 /**
  * Callback for after a player dies.
- * @see com.viral32111.events.mixin.server.ServerPlayerEntityMixin.onDeath
+ * @see com.viral32111.events.mixin.server.PlayerEntityMixin.onDeath
  * @see com.viral32111.events.listener.server.playerDeathCallbackListener
  * @since 0.2.0
  */
@@ -19,10 +19,10 @@ fun interface PlayerDeathCallback {
 				PlayerDeathCallback { player, damageSource ->
 					for (listener in listeners) {
 						val result = listener.interact(player, damageSource)
-						if (result != ActionResult.PASS) return@PlayerDeathCallback result
+						if (result != InteractionResult.PASS) return@PlayerDeathCallback result
 					}
 
-					return@PlayerDeathCallback ActionResult.PASS
+					return@PlayerDeathCallback InteractionResult.PASS
 				}
 			}
 	}
@@ -35,5 +35,5 @@ fun interface PlayerDeathCallback {
 	 * @see PlayerDeathCallback
 	 * @since 0.2.0
 	 */
-	fun interact(player: ServerPlayerEntity, damageSource: DamageSource): ActionResult
+	fun interact(player: Player, damageSource: DamageSource): InteractionResult
 }

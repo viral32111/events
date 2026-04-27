@@ -3,7 +3,7 @@ package com.viral32111.events.callback.server
 import com.mojang.authlib.GameProfile
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
-import net.minecraft.util.ActionResult
+import net.minecraft.world.InteractionResult
 import java.net.SocketAddress
 
 /**
@@ -19,10 +19,10 @@ fun interface PlayerCanJoinCallback {
 				PlayerCanJoinCallback { socketAddress, gameProfile ->
 					for (listener in listeners) {
 						val result = listener.interact(socketAddress, gameProfile)
-						if (result != ActionResult.PASS) return@PlayerCanJoinCallback result
+						if (result != InteractionResult.PASS) return@PlayerCanJoinCallback result
 					}
 
-					return@PlayerCanJoinCallback ActionResult.PASS
+					return@PlayerCanJoinCallback InteractionResult.PASS
 				}
 			}
 	}
@@ -35,5 +35,5 @@ fun interface PlayerCanJoinCallback {
 	 * @see PlayerCanJoinCallback
 	 * @since 0.2.0
 	 */
-	fun interact(socketAddress: SocketAddress, gameProfile: GameProfile): ActionResult
+	fun interact(socketAddress: SocketAddress, gameProfile: GameProfile): InteractionResult
 }

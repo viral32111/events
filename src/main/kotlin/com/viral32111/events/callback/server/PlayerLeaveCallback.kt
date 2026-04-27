@@ -2,8 +2,8 @@ package com.viral32111.events.callback.server
 
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.ActionResult
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
 
 /**
  * Callback for after a player leaves the server.
@@ -18,10 +18,10 @@ fun interface PlayerLeaveCallback {
 				PlayerLeaveCallback { player ->
 					for (listener in listeners) {
 						val result = listener.interact(player)
-						if (result != ActionResult.PASS) return@PlayerLeaveCallback result
+						if (result != InteractionResult.PASS) return@PlayerLeaveCallback result
 					}
 
-					return@PlayerLeaveCallback ActionResult.PASS
+					return@PlayerLeaveCallback InteractionResult.PASS
 				}
 			}
 	}
@@ -33,5 +33,5 @@ fun interface PlayerLeaveCallback {
 	 * @see PlayerLeaveCallback
 	 * @since 0.2.0
 	 */
-	fun interact(player: ServerPlayerEntity): ActionResult
+	fun interact(player: Player): InteractionResult
 }

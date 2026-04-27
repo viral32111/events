@@ -4,12 +4,12 @@ import com.mojang.authlib.GameProfile;
 import com.viral32111.events.callback.server.PlayerCanJoinCallback;
 import com.viral32111.events.callback.server.PlayerJoinCallback;
 import com.viral32111.events.callback.server.PlayerLeaveCallback;
-import net.minecraft.network.ClientConnection;
-import net.minecraft.server.PlayerManager;
-import net.minecraft.server.network.ConnectedClientData;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
+import net.minecraft.network.Connection;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.network.CommonListenerCookie;
+import net.minecraft.server.players.PlayerList;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.net.SocketAddress;
 
-@Mixin(PlayerManager.class)
-public class PlayerManagerMixin {
+@Mixin(PlayerList.class)
+public class PlayerListMixin {
 
 	/**
 	 * Runs when a player attempts to join the server (before ban & whitelist checks).
@@ -30,14 +30,14 @@ public class PlayerManagerMixin {
 	 * @since 0.1.0
 	 */
 	@Inject(method = "checkCanJoin", at = @At("HEAD"), cancellable = true)
-	private void viral32111_events_checkCanJoin(SocketAddress socketAddress, GameProfile gameProfile, CallbackInfoReturnable<Text> callbackInfo) {
+	private void viral32111_events_checkCanJoin(SocketAddress socketAddress, GameProfile gameProfile, CallbackInfoReturnable<Component> callbackInfo) {
 
 		// Invoke all listeners of this mixin's callback
-		ActionResult actionResult = PlayerCanJoinCallback.Companion.getEVENT().invoker().interact(socketAddress, gameProfile);
+		InteractionResult actionResult = PlayerCanJoinCallback.Companion.getEVENT().invoker().interact(socketAddress, gameProfile);
 
 		// Prevent the player from joining if any of the listeners return a failure
-		if (actionResult == ActionResult.FAIL) {
-			callbackInfo.setReturnValue(Text.of("Go away!"));
+		if (actionResult == InteractionResult.FAIL) {
+			callbackInfo.setReturnValue(Component.nullToEmpty("Go away!"));
 		}
 
 	}
@@ -51,7 +51,7 @@ public class PlayerManagerMixin {
 	 * @since 0.1.0
 	 */
 	@Inject(method = "onPlayerConnect", at = @At("TAIL"))
-	private void viral32111_events_onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, ConnectedClientData clientData, CallbackInfo ci) {
+	private void viral32111_events_onPlayerConnect(Connection connection, Player player, CommonListenerCookie clientData, CallbackInfo ci) {
 
 		// Invoke all listeners of this mixin's callback
 		// No need to check the listener results as this mixin cannot be cancelled
@@ -66,7 +66,7 @@ public class PlayerManagerMixin {
 	 * @since 0.1.0
 	 */
 	@Inject(method = "remove", at = @At("TAIL"))
-	private void viral32111_events_remove(ServerPlayerEntity player, CallbackInfo callbackInfo) {
+	private void viral32111_events_remove(Player player, CallbackInfo callbackInfo) {
 
 		// Invoke all listeners of this mixin's callback
 		// No need to check the listener results as this mixin cannot be cancelled

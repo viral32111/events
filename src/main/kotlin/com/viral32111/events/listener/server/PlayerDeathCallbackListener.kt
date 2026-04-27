@@ -1,9 +1,9 @@
 package com.viral32111.events.listener.server
 
 import com.viral32111.events.Main
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.ActionResult
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.damagesource.DamageSource
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -15,25 +15,25 @@ import kotlin.math.roundToInt
  * @see com.viral32111.events.callback.server.PlayerCanJoinCallback
  * @since 0.2.0
  */
-fun playerDeathCallbackListener(player: ServerPlayerEntity, damageSource: DamageSource): ActionResult {
+fun playerDeathCallbackListener(player: ServerPlayer, damageSource: DamageSource): InteractionResult {
 
 	// Store the source & attacker of the player's death.
 	// NOTE: These can be null if the death was not caused by another entity (i.e., falling, /kill).
-	val source = damageSource.source // e.g., Arrow
-	val attacker = damageSource.attacker // e.g., Skeleton
+	val source = damageSource.directEntity // e.g., Arrow
+	val attacker = damageSource.entity // e.g., Skeleton
 
 	// The player's username and unique identifier.
 	val playerName = player.name.string
-	val playerUUID = player.uuidAsString
+	val playerUUID = player.stringUUID
 
 	// The player's position at the time of death.
-	val playerPosX = player.pos.getX().roundToInt()
-	val playerPosY = player.pos.getY().roundToInt()
-	val playerPosZ = player.pos.getZ().roundToInt()
+	val playerPosX = player.x.roundToInt()
+	val playerPosY = player.y.roundToInt()
+	val playerPosZ = player.z.roundToInt()
 
 	// The reason for the player's death.
 	// NOTE: This is not the same as the death message! Use 'damageSource.getDeathMessage( player ).getString()' for that.
-	var deathReason: String = damageSource.name.uppercase(Locale.getDefault())
+	var deathReason: String = damageSource.msgId.uppercase(Locale.getDefault())
 	if (source != null && attacker != null) {
 		val sourceName = source.name.string
 		val attackerName = attacker.name.string
@@ -49,6 +49,6 @@ fun playerDeathCallbackListener(player: ServerPlayerEntity, damageSource: Damage
 	Main.LOGGER.info("Player '$playerName' ($playerUUID) died due to '$deathReason' at [$playerPosX, $playerPosY, $playerPosZ].")
 
 	// Pass to allow other listeners to execute.
-	return ActionResult.PASS
+	return InteractionResult.PASS
 
 }

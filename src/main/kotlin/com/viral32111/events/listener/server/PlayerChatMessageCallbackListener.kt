@@ -1,9 +1,9 @@
 package com.viral32111.events.listener.server
 
 import com.viral32111.events.Main
-import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.ActionResult
+import net.minecraft.network.protocol.game.ServerboundChatPacket
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.InteractionResult
 
 /**
  * Runs when a player has sent a chat message.
@@ -13,22 +13,22 @@ import net.minecraft.util.ActionResult
  * @see com.viral32111.events.callback.server.PlayerCanJoinCallback
  * @since 0.2.0
  */
-fun playerChatMessageCallbackListener(player: ServerPlayerEntity, packet: ChatMessageC2SPacket): ActionResult {
+fun playerChatMessageCallbackListener(player: ServerPlayer, packet: ServerboundChatPacket): InteractionResult {
 
 	// The player's username and unique identifier.
 	val playerName: String = player.name.string
-	val playerUUID: String = player.uuidAsString
+	val playerUUID: String = player.stringUUID
 
 	// The content of the chat message.
-	val messageContent = packet.chatMessage()
+	val messageContent = packet.message()
 
 	// Is the message signed?
-	val isSigned = packet.signature()?.data?.isNotEmpty()
+	val isSigned = packet.signature()?.bytes?.isNotEmpty()
 
 	// Display a console message with details of this event.
 	Main.LOGGER.info("Player '$playerName' ($playerUUID) sent ${if (isSigned == true) "signed" else "unsigned"} chat message '$messageContent'.")
 
 	// Pass to allow other listeners to execute.
-	return ActionResult.PASS
+	return InteractionResult.PASS
 
 }

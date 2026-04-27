@@ -2,8 +2,8 @@ package com.viral32111.events.callback.server
 
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.util.ActionResult
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
 
 fun interface PlayerGainExperienceCallback {
 	companion object {
@@ -12,13 +12,13 @@ fun interface PlayerGainExperienceCallback {
 				PlayerGainExperienceCallback { player, experience ->
 					for (listener in listeners) {
 						val result = listener.interact(player, experience)
-						if (result != ActionResult.PASS) return@PlayerGainExperienceCallback result
+						if (result != InteractionResult.PASS) return@PlayerGainExperienceCallback result
 					}
 
-					return@PlayerGainExperienceCallback ActionResult.PASS
+					return@PlayerGainExperienceCallback InteractionResult.PASS
 				}
 			}
 	}
 
-	fun interact(player: PlayerEntity, experience: Int): ActionResult
+	fun interact(player: Player, experience: Int): InteractionResult
 }

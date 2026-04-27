@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "events",
-	"version": "${ version }",
+	"version": "${mod_version}",
 	"name": "Events",
 	"description": "Callbacks for commonly used mixins.",
 	"authors": [
@@ -48,11 +48,11 @@
 		}
 	],
 	"depends": {
-		"java": ">=${ java }",
-		"minecraft": ">=${ minecraft }",
-		"fabricloader": ">=${ fabricloader }",
-		"fabric-api": ">=${ fabric_api }",
-		"fabric-language-kotlin": ">=${ fabric_language_kotlin }"
+		"java": ">=${java_version}",
+		"minecraft": ">=${minecraft_version}",
+		"fabricloader": ">=${fabric_loader_version}",
+		"fabric-api": ">=${fabric_api_version}",
+		"fabric-language-kotlin": ">=${fabric_language_kotlin_version}"
 	},
 	"suggests": {}
 }
